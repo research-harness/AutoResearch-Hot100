@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "repo": "microsoft/RD-Agent",
+  "url": "https://github.com/microsoft/RD-Agent",
+  "analyzed_commit": "4834df2b6f3e417e5d0512dfe4fd24a8ac338b05",
+  "snapshot_date": "2026-09-16",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "docs/project_framework_introduction.rst",
+    "rdagent/utils/workflow/loop.py",
+    "rdagent/components/workflow/rd_loop.py",
+    "rdagent/core/experiment.py",
+    "rdagent/core/evolving_framework.py",
+    "rdagent/app/data_science/loop.py"
+  ],
+  "review_status": "migrated-reviewed"
+}

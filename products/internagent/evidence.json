@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "repo": "InternScience/InternAgent",
+  "url": "https://github.com/InternScience/InternAgent",
+  "analyzed_commit": "fa8c3eedfa9751d3752ea6eb49220b303ac2397d",
+  "snapshot_date": "2026-09-16",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "config/default_config.yaml",
+    "launch_discovery.py",
+    "internagent/mas/interface.py",
+    "internagent/mas/workflow/data_type.py",
+    "internagent/mas/workflow/orchestration_agent.py",
+    "internagent/mas/tools/literature_search.py",
+    "internagent/stage.py"
+  ],
+  "review_status": "migrated-reviewed"
+}

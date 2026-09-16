@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+  "analyzed_commit": "330c8e764435a731eff571e3efdda70b363d0792",
+  "snapshot_date": "2026-09-16",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE.md",
+    "AGENTS.md",
+    "plugin.json",
+    "pyproject.toml",
+    "skills/scientific-writing/SKILL.md",
+    "skills/literature-review/SKILL.md",
+    "skills/paperclip/SKILL.md",
+    "skills/paper-lookup/SKILL.md",
+    "tests/run_all.py"
+  ],
+  "review_status": "migrated-reviewed"
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "SamuelSchmidgall/AgentLaboratory",
+  "url": "https://github.com/SamuelSchmidgall/AgentLaboratory",
+  "analyzed_commit": "d9017d90e329112d2a80b7712f37ee9094d2cd27",
+  "snapshot_date": "2026-09-16",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "ai_lab_repo.py",
+    "agents.py",
+    "tools.py",
+    "mlesolver.py",
+    "papersolver.py"
+  ],
+  "review_status": "migrated-reviewed"
+}

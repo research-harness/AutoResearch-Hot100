@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "repo": "Future-House/paper-qa",
+  "url": "https://github.com/Future-House/paper-qa",
+  "analyzed_commit": "57e89f7223b0960d5ee5ea048c69e3c47e088572",
+  "snapshot_date": "2026-09-16",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "src/paperqa/agents/main.py",
+    "src/paperqa/agents/tools.py",
+    "src/paperqa/agents/env.py",
+    "src/paperqa/docs.py",
+    "src/paperqa/settings.py",
+    "src/paperqa/types.py"
+  ],
+  "review_status": "migrated-reviewed"
+}

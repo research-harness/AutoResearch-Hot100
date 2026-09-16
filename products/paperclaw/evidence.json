@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "repo": "SequenxAI/PaperClaw",
+  "url": "https://github.com/SequenxAI/PaperClaw",
+  "analyzed_commit": "fd87ea212a777c9d55d57cc2e61b3b66a0138949",
+  "snapshot_date": "2026-09-16",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "paperclaw/__main__.py",
+    "paperclaw/cli.py",
+    "paperclaw/domains.py",
+    "paperclaw/iterative_pipeline.py",
+    "paperclaw/experiments.py",
+    "paperclaw/paper.py",
+    "paperclaw/references.py",
+    "paperclaw/jobs.py",
+    "paperclaw/images.py"
+  ],
+  "review_status": "migrated-reviewed"
+}

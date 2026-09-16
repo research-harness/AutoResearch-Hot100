@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "repo": "dwzhu-pku/PaperBanana",
+  "url": "https://github.com/dwzhu-pku/PaperBanana",
+  "analyzed_commit": "836455537e863b5a2f40dace487a782c0bc5ef94",
+  "snapshot_date": "2026-09-16",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "main.py",
+    "app.py",
+    "agents/retriever_agent.py",
+    "agents/planner_agent.py",
+    "agents/stylist_agent.py",
+    "agents/visualizer_agent.py",
+    "agents/critic_agent.py",
+    "prompts/diagram_eval_prompts.py",
+    "prompts/plot_eval_prompts.py"
+  ],
+  "review_status": "migrated-reviewed"
+}

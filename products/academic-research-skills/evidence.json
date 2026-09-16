@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "Imbad0202/academic-research-skills",
+  "url": "https://github.com/Imbad0202/academic-research-skills",
+  "analyzed_commit": "3c546bc08c56f79e0068f1ea4f0acedf5bf69b5e",
+  "snapshot_date": "2026-09-16",
+  "license": "CC BY-NC 4.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    ".claude/CLAUDE.md",
+    ".claude/CHANGELOG.md",
+    "docs/ARCHITECTURE.md",
+    "academic-pipeline/SKILL.md",
+    "academic-pipeline/agents/integrity_verification_agent.md",
+    "academic-pipeline/agents/claim_ref_alignment_audit_agent.md"
+  ],
+  "review_status": "migrated-reviewed"
+}

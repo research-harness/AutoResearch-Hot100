@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "SakanaAI/AI-Scientist-v2",
+  "url": "https://github.com/SakanaAI/AI-Scientist-v2",
+  "analyzed_commit": "96bd51617cfdbb494a9fc283af00fe090edfae48",
+  "snapshot_date": "2026-09-16",
+  "license": "AI Scientist Source Code License v1.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "bfts_config.yaml",
+    "launch_scientist_bfts.py",
+    "ai_scientist/treesearch/agent_manager.py",
+    "ai_scientist/treesearch/interpreter.py",
+    "ai_scientist/perform_plotting.py",
+    "ai_scientist/perform_writeup.py"
+  ],
+  "review_status": "migrated-reviewed"
+}

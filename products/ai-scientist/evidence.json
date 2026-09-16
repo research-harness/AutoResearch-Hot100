@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "SakanaAI/AI-Scientist",
+  "url": "https://github.com/SakanaAI/AI-Scientist",
+  "analyzed_commit": "1de1dbc1f4ee2c5f61e9c94348d55eb51d7fa2eb",
+  "snapshot_date": "2026-09-16",
+  "license": "AI Scientist Source Code License v1.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "launch_scientist.py",
+    "ai_scientist/generate_ideas.py",
+    "ai_scientist/perform_experiments.py",
+    "ai_scientist/perform_writeup.py",
+    "ai_scientist/perform_review.py"
+  ],
+  "review_status": "migrated-reviewed"
+}
