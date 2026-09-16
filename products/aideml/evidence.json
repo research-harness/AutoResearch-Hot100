@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "repo": "WecoAI/aideml",
+  "url": "https://github.com/WecoAI/aideml",
+  "analyzed_commit": "60b3978ddf65b71f86eb7c64506965048a1398cf",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "requirements.txt",
+    "setup.py",
+    "Dockerfile",
+    "Makefile",
+    "aide/agent.py",
+    "aide/interpreter.py",
+    "aide/journal.py",
+    "aide/run.py",
+    "aide/journal2report.py",
+    "aide/utils/config.py"
+  ],
+  "review_status": "independently-reviewed"
+}

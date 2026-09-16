@@ -7,8 +7,8 @@
 | GitHub | https://github.com/dwzhu-pku/PaperBanana |
 | License | Apache-2.0 |
 | Stars | 7,088（2026-09-16 快照） |
-| GitHub 最后可读 push / 本地 HEAD | 2026-06-25 · `8364555` |
-| 拉取状态 | 2026-09-16 直连 GitHub SSH fetch；已与 `origin/main` 一致 |
+| GitHub 最后 push / 分析 commit | 2026-06-25 · `8364555` |
+| 分析快照 | 2026-09-16；固定 commit 可由公开 GitHub 复核 |
 | 产品类型 | **科研绘图**：方法/架构示意图及部分统计图，不是全链路论文系统 |
 | 分析证据 | README、`agents/`、`prompts/`、`main.py`、`app.py`、LICENSE、PaperBananaBench 项目材料 |
 
@@ -95,7 +95,7 @@ README 将 Retriever、Planner、Stylist、Visualizer、Critic 定义为五个�
 
 **缺点**
 
-- 已验证本地 `HEAD == origin/main`；最后上游提交仍为 2026-06，维护节奏低于近期活跃的 ARS/RD-Agent。
+- 分析 commit 的日期为 2026-06，维护节奏低于同一快照中近期活跃的 ARS/RD-Agent。
 - 统计图和样式迁移的关键能力仍是 TODO。
 - 参考集偏计算机科学；生图 provider/key/并发配额是运营瓶颈。
 

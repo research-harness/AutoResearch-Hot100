@@ -7,8 +7,8 @@
 | GitHub | https://github.com/Future-House/paper-qa |
 | License | Apache-2.0 |
 | Stars | 9,203（2026-09-16 快照） |
-| GitHub 最后 push | 2026-09-15 |
-| 本地 HEAD | `57e89f7` · 2026-08-12；落后于远端 pushed_at |
+| GitHub 仓库 pushed_at | 2026-09-15（仓库级动态元数据，不代表默认分支新增提交） |
+| 分析 commit | `57e89f7` · 2026-08-12；与当时默认分支 HEAD 一致 |
 | 产品类型 | **论文检索 / RAG / 有证据问答**；不是论文生产链 |
 | 分析证据 | README、`src/paperqa/agents/main.py`、`tools.py`、`pyproject.toml`、LICENSE |
 
@@ -94,7 +94,7 @@ README 的默认算法分为 Paper Search、Gather Evidence、Generate Answer；
 
 - 不能代替研究工作流，更不会跑实验或把答案变成合规论文。
 - 证据质量仍受投入文档、解析与检索覆盖限制；有引用不自动等于论断正确。
-- 本地 clone 略落后远端，详情须以当前 API/发布版本再核。
+- 仓库级 `pushed_at` 会被其他 ref 活动更新，不能仅据此判断默认分支的新旧；分析必须继续绑定明确 commit。
 
 ## 12. RH 可学的 1–3 条
 

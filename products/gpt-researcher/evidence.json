@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "repo": "assafelovic/gpt-researcher",
+  "url": "https://github.com/assafelovic/gpt-researcher",
+  "analyzed_commit": "6f998577d547b1e54ec662dac63583aa11e3b84b",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "gpt_researcher/agent.py",
+    "gpt_researcher/prompts.py",
+    "gpt_researcher/skills/researcher.py",
+    "gpt_researcher/skills/deep_research.py",
+    "gpt_researcher/skills/writer.py",
+    "gpt_researcher/skills/curator.py",
+    "gpt_researcher/actions/report_generation.py",
+    "gpt_researcher/actions/markdown_processing.py",
+    "deep_agents/agent.py"
+  ],
+  "review_status": "independently-reviewed"
+}

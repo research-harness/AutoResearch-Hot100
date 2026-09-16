@@ -8,7 +8,7 @@
 | License | MIT |
 | Stars | 14,648（2026-09-16 快照） |
 | GitHub 最后 push | 2026-09-15 |
-| 本地 HEAD | `4834df2` · 2026-09-15 |
+| 分析 commit | `4834df2` · 2026-09-15 |
 | 产品类型 | 端到端 **ML/R&D** 系统；不是端到端论文生产器 |
 | 分析证据 | README、`docs/project_framework_introduction.rst`、`rdagent/utils/workflow/loop.py`、`rdagent/components/workflow/rd_loop.py`、场景目录 |
 
@@ -119,4 +119,4 @@ flowchart LR
 ---
 
 > 📌事实边界
-> 信息截止 2026-09-16；本页只读本地仓与公开元数据。没有运行 RD-Agent、没有使用任何竞品密钥，也没有修改竞品代码。
+> 信息截止 2026-09-16，分析绑定公开 commit `4834df2`；本页未运行 RD-Agent，因此不把 README 或源码中的能力写成效果复现结论。

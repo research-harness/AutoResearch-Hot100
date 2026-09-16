@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "repo": "karpathy/autoresearch",
+  "url": "https://github.com/karpathy/autoresearch",
+  "analyzed_commit": "228791fb499afffb54b46200aca536f79142f117",
+  "snapshot_date": "2026-09-17",
+  "license": "未声明（GitHub API NOASSERTION）",
+  "evidence_files": [
+    "README.md",
+    "program.md",
+    "prepare.py",
+    "train.py",
+    "pyproject.toml",
+    "analysis.ipynb"
+  ],
+  "review_status": "independently-reviewed"
+}

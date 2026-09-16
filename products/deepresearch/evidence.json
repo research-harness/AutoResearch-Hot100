@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "repo": "Alibaba-NLP/DeepResearch",
+  "url": "https://github.com/Alibaba-NLP/DeepResearch",
+  "analyzed_commit": "f72f75d8c3eb842f2bbbab096a12206ff66e270f",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "FAQ.md",
+    "LICENSE",
+    "inference/react_agent.py",
+    "inference/prompt.py",
+    "inference/run_multi_react.py",
+    "inference/tool_search.py",
+    "inference/tool_visit.py",
+    "inference/tool_scholar.py",
+    "inference/tool_python.py",
+    "inference/tool_file.py"
+  ],
+  "review_status": "independently-reviewed"
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "repo": "stanford-oval/storm",
+  "url": "https://github.com/stanford-oval/storm",
+  "analyzed_commit": "fb951af7744dab086e34962e9bc6fe878e145f83",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "setup.py",
+    "knowledge_storm/interface.py",
+    "knowledge_storm/storm_wiki/engine.py",
+    "knowledge_storm/storm_wiki/modules/knowledge_curation.py",
+    "knowledge_storm/storm_wiki/modules/outline_generation.py",
+    "knowledge_storm/storm_wiki/modules/article_generation.py",
+    "knowledge_storm/storm_wiki/modules/article_polish.py",
+    "knowledge_storm/storm_wiki/modules/storm_dataclass.py",
+    "knowledge_storm/collaborative_storm/engine.py"
+  ],
+  "review_status": "independently-reviewed"
+}

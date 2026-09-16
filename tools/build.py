@@ -121,7 +121,7 @@ def render_project(project: dict) -> None:
         "{{TITLE}}": html.escape(title),
         "{{DESCRIPTION}}": html.escape(description, quote=True),
         "{{CANONICAL}}": canonical,
-        "{{BRAND}}": "自动化科研图谱",
+        "{{BRAND}}": "AutoResearch Hot 100",
         "{{SUB}}": f'{project["repo"]} · {project["snapshot_date"]}',
         "{{HOME}}": '<a class="home" href="../../">← 返回项目总览</a>',
         "{{TOC}}": build_toc(toc),
@@ -150,7 +150,8 @@ def render_dashboard(projects: list[dict]) -> None:
     cards: list[str] = []
     for project in sorted(projects, key=lambda item: item["featured_order"]):
         tags = "".join(f'<span class="tag">{html.escape(tag)}</span>' for tag in [project["category"], *project["layers"]])
-        searchable = " ".join([project["name"], project["repo"], project["tagline"], project["category"], *project["layers"]]).lower()
+        report_text = (ROOT / "products" / project["slug"] / "report.md").read_text(encoding="utf-8")
+        searchable = " ".join([project["name"], project["repo"], project["tagline"], project["category"], *project["layers"], report_text]).lower()
         cards.append(
             f'<article class="card" data-order="{project["featured_order"]}" data-name="{html.escape(project["name"], quote=True)}" '
             f'data-category="{html.escape(project["category"], quote=True)}" data-layers="{html.escape("|".join(project["layers"]), quote=True)}" '

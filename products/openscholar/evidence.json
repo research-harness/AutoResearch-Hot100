@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "AkariAsai/OpenScholar",
+  "url": "https://github.com/AkariAsai/OpenScholar",
+  "analyzed_commit": "0e9b8fb912273d3dae39e593da86e4f6d3bf8de1",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "requirements.txt",
+    "run.py",
+    "src/open_scholar.py",
+    "src/use_search_apis.py",
+    "retriever/src/search.py",
+    "retriever/src/index.py"
+  ],
+  "review_status": "independently-reviewed"
+}

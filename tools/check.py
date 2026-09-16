@@ -158,17 +158,36 @@ def check_uniqueness(projects: list[dict], errors: list[str]) -> None:
         duplicates = sorted({str(value) for value in values if values.count(value) > 1})
         if duplicates:
             fail(errors, f"duplicate {field}: {duplicates}")
-    directories = {path.name for path in (ROOT / "products").iterdir() if path.is_dir()}
-    records = {str(project.get("slug")) for project in projects}
-    if directories != records:
-        fail(errors, f"product directories and manifest differ: only dirs={sorted(directories-records)}, only manifest={sorted(records-directories)}")
+    directories = {
+        path.name for path in (ROOT / "products").iterdir()
+        if path.is_dir() and any(path.iterdir())
+    }
+    published = {str(project.get("slug")) for project in projects if project.get("status") == "published"}
+    if directories != published:
+        fail(errors, f"product directories and published manifest differ: only dirs={sorted(directories-published)}, only manifest={sorted(published-directories)}")
+
+
+def check_active_markup(text: str, label: str, errors: list[str]) -> None:
+    soup = BeautifulSoup(text, "html.parser")
+    dangerous_tags = {"script", "iframe", "object", "embed", "form", "base"}
+    for tag in soup.find_all(dangerous_tags):
+        fail(errors, f"{label}: active HTML tag <{tag.name}> is not allowed")
+    for tag in soup.find_all(True):
+        for attr, value in tag.attrs.items():
+            if attr.lower().startswith("on"):
+                fail(errors, f"{label}: event handler attribute {attr!r} is not allowed")
+            if attr.lower() in {"href", "src", "action", "formaction"}:
+                raw = str(value).strip().lower()
+                if raw.startswith(("javascript:", "vbscript:", "data:")):
+                    fail(errors, f"{label}: unsafe URL scheme in {attr!r}")
 
 
 def check_public_hygiene(errors: list[str]) -> None:
-    roots = [ROOT / "data", ROOT / "products", ROOT / "site", ROOT / "tools"]
-    candidates = [ROOT / "README.md", ROOT / "CONTENT-LICENSE.md", ROOT / "CNAME"]
+    roots = [ROOT / "data", ROOT / "products", ROOT / "site", ROOT / "tools", ROOT / ".github"]
+    candidates = [ROOT / "README.md", ROOT / "CONTENT-LICENSE.md", ROOT / "CNAME", ROOT / "LICENSE"]
     for directory in roots:
-        candidates.extend(path for path in directory.rglob("*") if path.is_file() and path.suffix in TEXT_SUFFIXES and "assets" not in path.parts)
+        if directory.exists():
+            candidates.extend(path for path in directory.rglob("*") if path.is_file() and path.suffix in TEXT_SUFFIXES and "assets" not in path.parts)
     candidates.remove(Path(__file__))
     secret_assignment = re.compile(r"(?i)(?:api[_-]?key|access[_-]?token|secret|password)\s*[:=]\s*['\"]?[A-Za-z0-9_./+\-=]{16,}")
     for path in candidates:
@@ -180,6 +199,8 @@ def check_public_hygiene(errors: list[str]) -> None:
                 fail(errors, f"{path.relative_to(ROOT)}: contains banned public text {banned!r}")
         if secret_assignment.search(text):
             fail(errors, f"{path.relative_to(ROOT)}: resembles a committed credential")
+        if path.suffix == ".md":
+            check_active_markup(text, str(path.relative_to(ROOT)), errors)
 
 
 def local_target(page: Path, raw_url: str) -> tuple[Path, str] | None:
@@ -221,6 +242,14 @@ def check_dist(projects: list[dict], errors: list[str]) -> None:
             fail(errors, f"{page.relative_to(ROOT)}: unresolved template marker")
         soup = BeautifulSoup(text, "html.parser")
         ids = {tag.get("id") for tag in soup.find_all(id=True)}
+        for node in soup.select("main script, main iframe, main object, main embed, main form, main base"):
+            fail(errors, f"{page.relative_to(ROOT)}: active content <{node.name}> found in report body")
+        for node in soup.select("main *"):
+            for attribute, value in node.attrs.items():
+                if attribute.lower().startswith("on"):
+                    fail(errors, f"{page.relative_to(ROOT)}: report body contains event handler {attribute!r}")
+                if attribute.lower() in {"href", "src", "action", "formaction"} and str(value).strip().lower().startswith(("javascript:", "vbscript:", "data:")):
+                    fail(errors, f"{page.relative_to(ROOT)}: report body contains unsafe URL scheme")
         for nested in soup.select("nav.side ul ul"):
             if not nested.parent or nested.parent.name != "li":
                 fail(errors, f"{page.relative_to(ROOT)}: nested TOC list is not inside its parent li")

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "repo": "langchain-ai/open_deep_research",
+  "url": "https://github.com/langchain-ai/open_deep_research",
+  "analyzed_commit": "1b7d2e80db9faa586165c60e09096dbbfd483a64",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "langgraph.json",
+    "src/open_deep_research/deep_researcher.py",
+    "src/open_deep_research/configuration.py",
+    "src/open_deep_research/state.py",
+    "src/open_deep_research/utils.py",
+    "src/open_deep_research/prompts.py",
+    "src/security/auth.py",
+    "tests/run_evaluate.py",
+    "tests/evaluators.py"
+  ],
+  "review_status": "independently-reviewed"
+}

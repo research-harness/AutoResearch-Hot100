@@ -7,8 +7,8 @@
 | GitHub | https://github.com/SequenxAI/PaperClaw |
 | License | MIT |
 | Stars | 低（本次快照约十余；不以此夸大成熟度） |
-| 最后可读本地 HEAD | 2026-06-26 · `fd87ea2` |
-| 拉取状态 | 2026-09-16 直连 GitHub SSH fetch；已与 `origin/main` 一致 |
+| 分析 commit | 2026-06-26 · `fd87ea2` |
+| 分析快照 | 2026-09-16；固定 commit 可由公开 GitHub 复核 |
 | 产品类型 | **端到端论文生产**；与 RH 的功能覆盖最接近之一 |
 | 分析证据 | README、`pyproject.toml`、`paperclaw/__main__.py`、CLI/agent 目录、LICENSE |
 
@@ -99,7 +99,7 @@ workspace 包含 figures；README 说明可用 matplotlib/TikZ 或可选 image A
 
 **缺点**
 
-- 社区信号很小，且本地最新可读提交是 2026-06；不能因功能清单完整就当成熟基线。
+- 社区信号很小，且分析 commit 停在 2026-06；不能因功能清单完整就当成熟基线。
 - 公开证据显示引用/实验完整性门不如 RH/ARS 的形式化。
 - 单体同时承担检索、编排、实验、写作和图，扩展到多租户/权限/服务化时边界容易变模糊。
 
@@ -123,4 +123,4 @@ workspace 包含 figures；README 说明可用 matplotlib/TikZ 或可选 image A
 ---
 
 > 📌事实边界
-> 本页的更新状态来自 2026-09-16 的本地 `git log` 与直连 GitHub SSH `fetch`；该工作树已与 `origin/main` 一致。没有 reset、rebase、强制合并或改写该竞争仓。
+> 本页绑定公开 commit `fd87ea2`，信息快照截止 2026-09-16；未独立复现其整条研究与实验流水线。

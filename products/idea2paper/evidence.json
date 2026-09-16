@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "AgentAlphaAGI/Idea2Paper",
+  "url": "https://github.com/AgentAlphaAGI/Idea2Paper",
+  "analyzed_commit": "64170d4d9ca9068b26bd561648ce5c576bf1a2fb",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "i2p_config.json",
+    "Paper-KG-Pipeline/src/idea2paper/application/pipeline/manager.py",
+    "Paper-KG-Pipeline/src/idea2paper/application/pipeline/planner.py",
+    "Paper-KG-Pipeline/src/idea2paper/application/pipeline/story_generator.py",
+    "Paper-KG-Pipeline/src/idea2paper/application/pipeline/refinement.py",
+    "Paper-KG-Pipeline/src/idea2paper/application/novelty/novelty_checker.py"
+  ],
+  "review_status": "independently-reviewed"
+}

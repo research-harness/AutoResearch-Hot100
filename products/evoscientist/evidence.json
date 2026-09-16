@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "repo": "EvoScientist/EvoScientist",
+  "url": "https://github.com/EvoScientist/EvoScientist",
+  "analyzed_commit": "418abca4f40a4080604834536342492dfd8bdf3e",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "EvoScientist/EvoScientist.py",
+    "EvoScientist/runtime.py",
+    "EvoScientist/subagents/_factory.py",
+    "EvoScientist/middleware/code_interpreter.py",
+    "EvoScientist/llm/registry.py",
+    "EvoScientist/memory/observations/store.py",
+    "EvoScientist/backends.py"
+  ],
+  "review_status": "independently-reviewed"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "repo": "HKUDS/Auto-Deep-Research",
+  "url": "https://github.com/HKUDS/Auto-Deep-Research",
+  "analyzed_commit": "9d671a334d22d58b34ea12af08994af393bbe685",
+  "snapshot_date": "2026-09-17",
+  "license": "未声明（GitHub API NOASSERTION）",
+  "evidence_files": [
+    "README.md",
+    "setup.cfg",
+    "autoagent/cli.py",
+    "autoagent/core.py",
+    "autoagent/types.py",
+    "autoagent/flow/core.py",
+    "autoagent/agents/system_agent/system_triage_agent.py",
+    "autoagent/agents/system_agent/websurfer_agent.py",
+    "autoagent/agents/system_agent/filesurfer_agent.py",
+    "autoagent/agents/system_agent/programming_agent.py",
+    "autoagent/tools/web_tools.py",
+    "autoagent/tools/file_surfer_tool.py"
+  ],
+  "review_status": "independently-reviewed"
+}
