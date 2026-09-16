@@ -31,21 +31,29 @@ def short_title(level: int, text: str) -> str:
 
 
 def build_toc(entries: list[tuple[int, str, str]]) -> str:
-    out = ['<ul class="toc">']
-    level = 2
-    for current, heading_id, text in entries:
-        if current == 4:
+    """Render nested headings with each child list inside its parent li."""
+    roots: list[list] = []
+    stack: list[tuple[int, list]] = []
+    for level, heading_id, text in entries:
+        if level == 4:
             continue
-        while current > level:
-            out.append("<ul>")
-            level += 1
-        while current < level:
-            out.append("</ul>")
-            level -= 1
-        out.append(f'<li class="l{current}"><a href="#{heading_id}">{html.escape(text)}</a></li>')
-    out.extend("</ul>" for _ in range(level - 2))
-    out.append("</ul>")
-    return "\n".join(out)
+        node = [level, heading_id, text, []]
+        while stack and stack[-1][0] >= level:
+            stack.pop()
+        (stack[-1][1] if stack else roots).append(node)
+        stack.append((level, node[3]))
+
+    def render(nodes: list[list]) -> str:
+        lines = ["<ul>"]
+        for level, heading_id, text, children in nodes:
+            lines.append(f'<li class="l{level}"><a href="#{heading_id}">{html.escape(text)}</a>')
+            if children:
+                lines.append(render(children))
+            lines.append("</li>")
+        lines.append("</ul>")
+        return "\n".join(lines)
+
+    return render(roots)
 
 
 def markdown_to_body(markdown: str) -> tuple[str, str, list[tuple[int, str, str]]]:

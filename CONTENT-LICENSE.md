@@ -1,6 +1,8 @@
 # 内容许可
 
 除单独注明外，本仓库中的原创中文分析、项目目录元数据与页面文案采用
+
+站点内置的 Mermaid 11.12.0 发布包由上游项目提供，SHA-256 为 `07e37dfa97b337ccc85365d57eddf99b9706f09db3b59b260d0333b23b343c4b`；其自身及所含依赖的许可证与版权声明以该文件末尾的上游 notice 为准。
 [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
 许可（CC BY 4.0）。转载时请注明“自动化科研图谱”并链接到原页面。
 

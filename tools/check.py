@@ -2,6 +2,7 @@
 """Validate Atlas source records and, when present, the generated site."""
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import sys
@@ -132,7 +133,7 @@ def check_project(project: dict, errors: list[str]) -> None:
         fail(errors, f"{label}: expected the canonical 13 sections in order, got {headings}")
     if report.count("```mermaid") < 1:
         fail(errors, f"{label}: report needs at least one Mermaid diagram")
-    if "📌事实边界" not in report.replace(" ", ""):
+    if "📌" not in report or "事实边界" not in report:
         fail(errors, f"{label}: report needs a 📌事实边界 callout")
     if len(report) < 3000:
         fail(errors, f"{label}: report is too short for a full analysis ({len(report)} characters)")
@@ -204,14 +205,25 @@ def check_dist(projects: list[dict], errors: list[str]) -> None:
     expected = 1 + sum(project.get("status") == "published" for project in projects)
     if len(pages) != expected:
         fail(errors, f"dist: expected {expected} HTML pages, found {len(pages)}")
-    if not (DIST / "assets" / "mermaid.min.js").is_file():
+    mermaid = DIST / "assets" / "mermaid.min.js"
+    if not mermaid.is_file():
         fail(errors, "dist: missing local Mermaid asset")
+    else:
+        digest = hashlib.sha256(mermaid.read_bytes()).hexdigest()
+        if digest != "07e37dfa97b337ccc85365d57eddf99b9706f09db3b59b260d0333b23b343c4b":
+            fail(errors, f"dist: unexpected Mermaid asset SHA-256 {digest}")
     for page in pages:
         text = page.read_text(encoding="utf-8")
+        for banned in BANNED_TEXT:
+            if banned in text:
+                fail(errors, f"{page.relative_to(ROOT)}: generated page contains banned public text {banned!r}")
         if re.search(r"{{[A-Z_]+}}", text):
             fail(errors, f"{page.relative_to(ROOT)}: unresolved template marker")
         soup = BeautifulSoup(text, "html.parser")
         ids = {tag.get("id") for tag in soup.find_all(id=True)}
+        for nested in soup.select("nav.side ul ul"):
+            if not nested.parent or nested.parent.name != "li":
+                fail(errors, f"{page.relative_to(ROOT)}: nested TOC list is not inside its parent li")
         canonical = soup.find("link", rel="canonical")
         if not canonical or not str(canonical.get("href", "")).startswith("https://atlas.zhice.io/"):
             fail(errors, f"{page.relative_to(ROOT)}: missing canonical URL")
