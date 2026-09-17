@@ -16,7 +16,18 @@ DIST = ROOT / "dist"
 PROJECTS = ROOT / "data" / "projects.jsonl"
 PAGE_TEMPLATE = ROOT / "site" / "template.html"
 DASHBOARD_TEMPLATE = ROOT / "site" / "dashboard-template.html"
+LIST_TEMPLATE = ROOT / "site" / "list-template.html"
 BASE_URL = "https://research-harness.github.io/AutoResearch-Hot100"
+GROUPS = (
+    ("end-to-end", "端到端科研系统", "从想法、实验到稿件的整条科研链。", ("端到端", "AI Scientist", "自主科学", "全模态", "模块化科研", "科研自动化", "开放世界", "论文生产", "论文到科研", "数据到论文")),
+    ("method-experiment", "方法发现与自动实验", "假设、实验循环和自动发现。", ("方法发现", "机器学习", "算法发现", "模型架构", "长程", "多模态自主", "科学发现", "自主机器学习")),
+    ("deep-research", "深度研究与文献", "检索、证据和长报告。", ("深度研究", "文献", "检索", "综述", "论文检索")),
+    ("writing-review", "写作、技能与审稿", "写作技能、审稿数据和辅助系统。", ("写作", "技能", "审稿", "评审")),
+    ("benchmarks", "评测与基准", "任务、环境和执行评测。", ("基准", "评测", "复现", "审计", "质量")),
+    ("bio-med", "生物医学", "生物医学 Agent 与实验设计。", ("生物", "医学", "单细胞")),
+    ("chem-lab", "化学、材料与实验室", "化学工具、材料设计和实验室编排。", ("化学", "材料", "分子", "原子", "实验室", "湿实验", "晶体")),
+    ("infra-tools", "基础设施与专用工具", "绘图、工具层、领域执行器和编排底座。", ()),
+)
 
 
 def load_projects() -> list[dict]:
@@ -144,45 +155,98 @@ def format_stars(project: dict) -> str:
     return f"{prefix}{stars:,}"
 
 
-def render_dashboard(projects: list[dict]) -> None:
-    categories = sorted({project["category"] for project in projects})
-    layers = sorted({layer for project in projects for layer in project["layers"]})
-    cards: list[str] = []
+def group_slug_for(project: dict) -> str:
+    category = project["category"]
+    for slug, _title, _lead, keys in GROUPS[:-1]:
+        if any(key in category for key in keys):
+            return slug
+    return GROUPS[-1][0]
+
+
+def grouped_projects(projects: list[dict]) -> dict[str, list[dict]]:
+    buckets = {slug: [] for slug, *_ in GROUPS}
     for project in sorted(projects, key=lambda item: item["featured_order"]):
-        tags = "".join(f'<span class="tag">{html.escape(tag)}</span>' for tag in [project["category"], *project["layers"]])
-        report_text = (ROOT / "products" / project["slug"] / "report.md").read_text(encoding="utf-8")
-        searchable = " ".join([project["name"], project["repo"], project["tagline"], project["category"], *project["layers"], report_text]).lower()
-        cards.append(
-            f'<article class="card" data-order="{project["featured_order"]}" data-name="{html.escape(project["name"], quote=True)}" '
-            f'data-category="{html.escape(project["category"], quote=True)}" data-layers="{html.escape("|".join(project["layers"]), quote=True)}" '
-            f'data-stars="{project["stars"] if project["stars"] is not None else -1}" data-updated="{project["pushed_at"]}" '
-            f'data-search="{html.escape(searchable, quote=True)}">'
-            f'<span class="rank">#{project["featured_order"]} · {html.escape(project["repo"])}</span>'
-            f'<h2><a href="products/{project["slug"]}/">{html.escape(project["name"])}</a></h2>'
-            f'<p>{html.escape(project["tagline"])}</p><div class="tags">{tags}</div>'
-            f'<div class="meta">Stars：{format_stars(project)} · 最近 push：{project["pushed_at"]}<br>'
-            f'分析 commit：<a href="{project["url"]}/tree/{project["analyzed_commit"]}">{project["analyzed_commit"][:7]}</a> · '
-            f'<a href="{project["url"]}">上游仓库</a></div></article>'
+        buckets[group_slug_for(project)].append(project)
+    missing = [slug for slug, items in buckets.items() if not items]
+    if missing:
+        raise SystemExit(f"empty groups: {missing}")
+    return buckets
+
+
+def project_list_items(projects: list[dict], href_prefix: str) -> str:
+    items = []
+    for project in projects:
+        tags = "".join(f'<span class="tag">{html.escape(tag)}</span>' for tag in [project["category"], *project["layers"][:3]])
+        items.append(
+            f'<article class="item"><span class="rank">#{project["featured_order"]} · {html.escape(project["repo"])}</span>'
+            f'<h2><a href="{href_prefix}{project["slug"]}/">{html.escape(project["name"])}</a></h2>'
+            f'<p>{html.escape(project["tagline"])}</p><div class="tags">{tags}</div></article>'
         )
-    template = DASHBOARD_TEMPLATE.read_text(encoding="utf-8")
-    replacements = {
-        "{{COUNT}}": str(len(projects)),
-        "{{CATEGORIES}}": str(len(categories)),
-        "{{SNAPSHOT}}": max(project["snapshot_date"] for project in projects),
-        "{{CATEGORY_OPTIONS}}": "".join(f'<option value="{html.escape(value, quote=True)}">{html.escape(value)}</option>' for value in categories),
-        "{{LAYER_OPTIONS}}": "".join(f'<option value="{html.escape(value, quote=True)}">{html.escape(value)}</option>' for value in layers),
-        "{{CARDS}}": "\n".join(cards),
-    }
+    return "\n".join(items)
+
+
+def fill_template(path: Path, replacements: dict[str, str]) -> str:
+    template = path.read_text(encoding="utf-8")
     for key, value in replacements.items():
         template = template.replace(key, value)
-    (DIST / "index.html").write_text(template, encoding="utf-8")
+    return template
+
+
+def render_dashboard(projects: list[dict]) -> None:
+    buckets = grouped_projects(projects)
+    group_cards = []
+    for slug, title, lead, _keys in GROUPS:
+        items = buckets[slug]
+        names = "、".join(project["name"] for project in items[:3])
+        group_cards.append(
+            f'<a class="card" href="groups/{slug}/"><span class="rank">{len(items)} 个项目</span>'
+            f'<h2>{html.escape(title)}</h2><p>{html.escape(lead)} 例如 {html.escape(names)}。</p></a>'
+        )
+    (DIST / "index.html").write_text(
+        fill_template(
+            DASHBOARD_TEMPLATE,
+            {
+                "{{COUNT}}": str(len(projects)),
+                "{{GROUPS}}": str(len(GROUPS)),
+                "{{SNAPSHOT}}": max(project["snapshot_date"] for project in projects),
+                "{{GROUP_CARDS}}": "\n".join(group_cards),
+            },
+        ),
+        encoding="utf-8",
+    )
+    list_template = LIST_TEMPLATE
+    for slug, title, lead, _keys in GROUPS:
+        items = buckets[slug]
+        dest = DIST / "groups" / slug
+        dest.mkdir(parents=True)
+        (dest / "index.html").write_text(
+            fill_template(
+                list_template,
+                {
+                    "{{TITLE}}": html.escape(f"{title}｜AutoResearch Hot 100"),
+                    "{{DESCRIPTION}}": html.escape(lead, quote=True),
+                    "{{CANONICAL}}": f"{BASE_URL}/groups/{slug}/",
+                    "{{CRUMB}}": '<a href="../../">AutoResearch Hot 100</a> / 分类',
+                    "{{EYEBROW}}": f"{len(items)} 个项目",
+                    "{{HEADING}}": html.escape(title),
+                    "{{LEAD}}": html.escape(lead),
+                    "{{ITEMS}}": project_list_items(items, "../../products/"),
+                    "{{HOME_HREF}}": "../../",
+                },
+            ),
+            encoding="utf-8",
+        )
 
 
 def write_support_files(projects: list[dict]) -> None:
     shutil.copy2(ROOT / "site" / "assets" / "mermaid.min.js", DIST / "assets" / "mermaid.min.js")
     (DIST / ".nojekyll").write_text("", encoding="utf-8")
     (DIST / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}/sitemap.xml\n", encoding="utf-8")
-    urls = [f"{BASE_URL}/", *(f'{BASE_URL}/products/{project["slug"]}/' for project in projects)]
+    urls = [
+        f"{BASE_URL}/",
+        *(f"{BASE_URL}/groups/{slug}/" for slug, *_ in GROUPS),
+        *(f'{BASE_URL}/products/{project["slug"]}/' for project in projects),
+    ]
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(f"  <url><loc>{url}</loc></url>" for url in urls) + "\n</urlset>\n"
     (DIST / "sitemap.xml").write_text(sitemap, encoding="utf-8")
 

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<link rel="canonical" href="{{CANONICAL}}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{DESCRIPTION}}">
+<meta property="og:url" content="{{CANONICAL}}">
+<style>
+:root{--bg:#fbfbfa;--fg:#202124;--muted:#687078;--line:#e5e2dc;--panel:#fff;--accent:#245b8d;--accent2:#e8f1fa;--max:980px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.wrap{max-width:var(--max);margin:auto;padding:0 24px}.hero{padding:42px 0 28px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--accent);font-weight:700;letter-spacing:.08em;font-size:.85em}.hero h1{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.2;margin:.2em 0 .35em}.hero p{max-width:720px;color:#4d5358}.crumb{margin:0 0 12px;color:var(--muted);font-size:.92em}.list{padding:22px 0 70px}.item{display:block;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:16px 18px;margin:0 0 12px}.item:hover{border-color:#afc4d7}.item .rank{color:var(--muted);font-size:.82em}.item h2{font-size:1.18em;margin:.12em 0 .2em;line-height:1.35}.item h2 a{color:var(--fg)}.item p{margin:.2em 0 .5em;color:#4d5358}.tags{display:flex;gap:6px;flex-wrap:wrap}.tag{font-size:.78em;background:var(--accent2);color:#234b70;padding:2px 7px;border-radius:99px}.footer{border-top:1px solid var(--line);padding:24px 0 50px;color:var(--muted);font-size:.9em}@media(max-width:700px){.wrap{padding:0 16px}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap"><p class="crumb">{{CRUMB}}</p><div class="eyebrow">{{EYEBROW}}</div><h1>{{HEADING}}</h1><p>{{LEAD}}</p></div></header>
+<main class="wrap"><section class="list">{{ITEMS}}</section></main>
+<footer class="footer"><div class="wrap">AutoResearch Hot 100 · <a href="{{HOME_HREF}}">返回总览</a> · <a href="https://github.com/research-harness/AutoResearch-Hot100">源代码与数据</a></div></footer>
+</body>
+</html>
