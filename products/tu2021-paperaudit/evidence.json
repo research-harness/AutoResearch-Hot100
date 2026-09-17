@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "TU2021/PaperAudit",
+  "url": "https://github.com/TU2021/PaperAudit",
+  "analyzed_commit": "de7582b188ca2d867298de978386ec1f5085806f",
+  "snapshot_date": "2026-09-17",
+  "license": "未声明（GitHub API NOASSERTION）",
+  "evidence_files": [
+    "README.md",
+    "detect/README.md",
+    "requirements.txt",
+    "detect/mas_error_detection.py",
+    "detect/agents.py",
+    "review/agents/PaperAudit/audit.py",
+    "review/agents/PaperAudit/paper_retrieval.py",
+    "detect/eval_detection.py"
+  ],
+  "review_status": "independently-reviewed"
+}

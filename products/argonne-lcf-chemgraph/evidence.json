@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "argonne-lcf/ChemGraph",
+  "url": "https://github.com/argonne-lcf/ChemGraph",
+  "analyzed_commit": "ef9ef71efca14ccef598a9e0fbab5478039d0be8",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "pyproject.toml",
+    "docs/workflows.md",
+    "src/chemgraph/graphs/main_agent.py",
+    "src/chemgraph/memory/durable.py",
+    "docs/mcp_servers.md",
+    "src/chemgraph/tools/report_tools.py"
+  ],
+  "review_status": "independently-reviewed"
+}

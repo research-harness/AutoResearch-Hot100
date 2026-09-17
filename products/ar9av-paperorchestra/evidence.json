@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "repo": "Ar9av/PaperOrchestra",
+  "url": "https://github.com/Ar9av/PaperOrchestra",
+  "analyzed_commit": "798f03a14ce582607ba2742d025691f226470641",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "skills/paper-orchestra/SKILL.md",
+    "skills/outline-agent/SKILL.md",
+    "skills/paper-orchestra/scripts/claim_evidence_gate.py",
+    "skills/literature-review-agent/scripts/citation_coverage.py"
+  ],
+  "review_status": "independently-reviewed"
+}

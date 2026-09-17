@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "brycewang-stanford/Auto-Empirical-Research-Skills",
+  "url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+  "analyzed_commit": "3b009a43ceacb9959654528b14075f88778118b6",
+  "snapshot_date": "2026-09-17",
+  "license": "CC BY-SA 4.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "SKILL.md",
+    "CITATION.cff",
+    "INSTALL.md",
+    "agents/README.md",
+    "catalog/skills.json"
+  ],
+  "review_status": "independently-reviewed"
+}

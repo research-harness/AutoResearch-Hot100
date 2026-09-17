@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "repo": "HKUST-KnowComp/NewtonBench",
+  "url": "https://github.com/HKUST-KnowComp/NewtonBench",
+  "analyzed_commit": "912a4ba5f4356ddd06acc16e44460ca30be4abc2",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "quick_start.py",
+    "modules/common/evaluation.py",
+    "modules/m0_gravity/core.py",
+    "modules/m0_gravity/laws.py",
+    "utils/vanilla_agent.py",
+    "utils/code_assisted_agent.py",
+    "utils/code_executor.py",
+    "result_analysis/summarize_results.py",
+    "utils/code_executor_base.py"
+  ],
+  "review_status": "independently-reviewed"
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "repo": "microsoft/qlib",
+  "url": "https://github.com/microsoft/qlib",
+  "analyzed_commit": "be725493eb1a6bbb42bf11b37aa7669f59610ff1",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "qlib/cli/run.py",
+    "qlib/model/trainer.py",
+    "qlib/workflow/record_temp.py",
+    "qlib/workflow/recorder.py",
+    "qlib/data/dataset/handler.py",
+    "qlib/contrib/data/handler.py",
+    "qlib/contrib/model/gbdt.py",
+    "qlib/backtest/backtest.py",
+    "qlib/contrib/strategy/signal_strategy.py",
+    "examples/benchmarks/LightGBM/workflow_config_lightgbm_Alpha158.yaml",
+    "qlib/contrib/report/analysis_position/report.py",
+    "qlib/workflow/task/manage.py"
+  ],
+  "review_status": "independently-reviewed"
+}

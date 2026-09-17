@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "repo": "PaperDebugger/paperdebugger",
+  "url": "https://github.com/PaperDebugger/paperdebugger",
+  "analyzed_commit": "527afed307371d213c495e0444f64eb3666c617c",
+  "snapshot_date": "2026-09-17",
+  "license": "AGPL-3.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "go.mod",
+    "demo/xtramcp/readme.md",
+    "internal/services/chat_v2.go",
+    "internal/services/toolkit/tools/xtramcp/loader_v2.go",
+    "internal/services/toolkit/tools/paper_score.go",
+    "internal/services/toolkit/tools/files/file_create.go",
+    "webapp/_webapp/src/adapters/document-adapter.ts",
+    "internal/api/chat/create_conversation_message_stream_v2.go",
+    "webapp/_webapp/src/components/message-entry-container/tools/paper-score-comment/add-comments-button.tsx"
+  ],
+  "review_status": "independently-reviewed"
+}

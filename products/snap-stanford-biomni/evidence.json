@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "snap-stanford/Biomni",
+  "url": "https://github.com/snap-stanford/Biomni",
+  "analyzed_commit": "400c1f366b96a35ca253e13c9b06c5076af41d65",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "biomni/agent/a1.py",
+    "biomni/model/retriever.py",
+    "biomni/tool/tool_registry.py",
+    "biomni/tool/literature.py",
+    "biomni/know_how/loader.py",
+    "biomni_env/README.md"
+  ],
+  "review_status": "independently-reviewed"
+}

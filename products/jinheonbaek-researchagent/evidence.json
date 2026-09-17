@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "repo": "JinheonBaek/ResearchAgent",
+  "url": "https://github.com/JinheonBaek/ResearchAgent",
+  "analyzed_commit": "babb49b51ebfcebedc39ccde12c9785be7bef46c",
+  "snapshot_date": "2026-09-17",
+  "license": "未声明（GitHub API NOASSERTION）",
+  "evidence_files": [
+    "README.md",
+    "code/pipelines/research_pipeline.py",
+    "code/knowledge/store.py",
+    "code/utils/s2.py",
+    "code/pipelines/agents/problem_validator.py"
+  ],
+  "review_status": "independently-reviewed"
+}

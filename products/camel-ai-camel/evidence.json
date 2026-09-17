@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "repo": "camel-ai/camel",
+  "url": "https://github.com/camel-ai/camel",
+  "analyzed_commit": "8c791b7b9cf7deab56cb5a92818c34499af9097f",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "camel/societies/workforce/task_channel.py",
+    "camel/societies/workforce/single_agent_worker.py",
+    "camel/societies/workforce/workforce.py",
+    "camel/memories/agent_memories.py",
+    "camel/retrievers/auto_retriever.py",
+    "camel/toolkits/code_execution.py",
+    "camel/toolkits/arxiv_toolkit.py"
+  ],
+  "review_status": "independently-reviewed"
+}

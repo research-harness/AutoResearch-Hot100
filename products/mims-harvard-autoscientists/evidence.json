@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "repo": "mims-harvard/AutoScientists",
+  "url": "https://github.com/mims-harvard/AutoScientists",
+  "analyzed_commit": "c71a92343b9a488ed10134be805845b9473ad18f",
+  "snapshot_date": "2026-09-17",
+  "license": "未声明（GitHub API NOASSERTION）",
+  "evidence_files": [
+    "README.md",
+    "launch.py",
+    "runbook.md",
+    "requirements.txt",
+    "system/reference/SKILL.md",
+    "system/reference/AGENT-SETUP.md",
+    "system/reference/PHASES.md",
+    "system/reference/LOGGING.md",
+    "system/reference/META-IMPROVEMENT.md",
+    "system/templates/ROLE-TEAM.md",
+    "system/templates/HEARTBEAT.md",
+    "system/external-repo-setup/SKILL.md",
+    "task-autoresearch/README.md",
+    "task-biomlbench/README.md",
+    "task-protein-gym/README.md"
+  ],
+  "review_status": "independently-reviewed"
+}

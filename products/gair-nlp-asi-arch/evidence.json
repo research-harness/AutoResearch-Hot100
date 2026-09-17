@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "stage": "candidate-freeze",
+  "status": "pending",
+  "review_status": "independently-reviewed",
+  "selection_order": 79,
+  "repo": "GAIR-NLP/ASI-Arch",
+  "url": "https://github.com/GAIR-NLP/ASI-Arch",
+  "analyzed_commit": "3113c51b04a1d4a7520a3b0238c6a08d3194d58f",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "requirements.txt",
+    "pipeline/pipeline.py",
+    "pipeline/config.py",
+    "pipeline/evolve/interface.py",
+    "pipeline/evolve/model/planner.py",
+    "pipeline/evolve/model/checker.py",
+    "pipeline/eval/interface.py",
+    "pipeline/analyse/interface.py",
+    "pipeline/database/interface.py",
+    "cognition_base/rag_service.py"
+  ]
+}

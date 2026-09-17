@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "MiroMindAI/MiroThinker",
+  "url": "https://github.com/MiroMindAI/MiroThinker",
+  "analyzed_commit": "1c4253f6774bf40314271a827304b842100e054c",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "apps/miroflow-agent/src/core/pipeline.py",
+    "apps/miroflow-agent/src/core/orchestrator.py",
+    "apps/miroflow-agent/src/core/tool_executor.py",
+    "libs/miroflow-tools/src/miroflow_tools/manager.py",
+    "libs/miroflow-tools/src/miroflow_tools/mcp_servers/python_mcp_server.py"
+  ],
+  "review_status": "independently-reviewed"
+}

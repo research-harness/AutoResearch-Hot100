@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "stage": "candidate-freeze",
+  "status": "pending",
+  "review_status": "independently-reviewed",
+  "selection_order": 80,
+  "repo": "mshumer/autonomous-researcher",
+  "url": "https://github.com/mshumer/autonomous-researcher",
+  "analyzed_commit": "6006b2cb5ceda8d5c066e4136c99269addf21f22",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "requirements.txt",
+    "main.py",
+    "agent.py",
+    "orchestrator.py",
+    "api_server.py",
+    "run_app.py",
+    "logger.py",
+    "experiment.py",
+    "frontend/src/components/Notebook/ResearchPaper.tsx",
+    "frontend/src/components/FindingsRail.tsx"
+  ]
+}

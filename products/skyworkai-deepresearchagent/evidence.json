@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "SkyworkAI/DeepResearchAgent",
+  "url": "https://github.com/SkyworkAI/DeepResearchAgent",
+  "analyzed_commit": "5e3c95d14266f8c4aa6a5deae1fe165c7cd1b87b",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "src/agent/tool_calling_agent.py",
+    "src/agent/planning_agent.py",
+    "src/tool/workflow_tools/deep_researcher.py",
+    "src/tool/workflow_tools/reporter.py",
+    "src/skill/server.py",
+    "src/version/server.py"
+  ],
+  "review_status": "independently-reviewed"
+}

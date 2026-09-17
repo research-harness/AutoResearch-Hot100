@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "bytedance/pasa",
+  "url": "https://github.com/bytedance/pasa",
+  "analyzed_commit": "2aaa6a9b1e48d24a2b7e21e8551f863dad9eeb84",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "paper_agent.py",
+    "paper_node.py",
+    "run_paper_agent.py",
+    "models.py",
+    "metrics.py",
+    "utils.py"
+  ],
+  "review_status": "independently-reviewed"
+}

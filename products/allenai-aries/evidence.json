@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "allenai/aries",
+  "url": "https://github.com/allenai/aries",
+  "analyzed_commit": "5691bae71a101225ed345d0ffc42e47609f03bbb",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "requirements.txt",
+    "setup.py",
+    "scripts/generate_edits.py",
+    "scripts/train_revision_alignment.py",
+    "data/configs/edit_generation_paper.json",
+    "aries/alignment/doc_edits.py"
+  ],
+  "review_status": "independently-reviewed"
+}

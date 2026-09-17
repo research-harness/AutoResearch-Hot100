@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "repo": "bowang-lab/MedRAX",
+  "url": "https://github.com/bowang-lab/MedRAX",
+  "analyzed_commit": "dae30e2f136ef0b2a40885a4c335386e9ffad052",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "main.py",
+    "medrax/agent/agent.py",
+    "medrax/tools/report_generation.py",
+    "medrax/tools/segmentation.py",
+    "medrax/docs/system_prompts.txt"
+  ],
+  "review_status": "independently-reviewed"
+}

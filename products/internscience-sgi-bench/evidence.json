@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "repo": "InternScience/SGI-Bench",
+  "url": "https://github.com/InternScience/SGI-Bench",
+  "analyzed_commit": "271270efe9f7594694cddb01e630a609542a8619",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "evaluation/requirements.txt",
+    "evaluation/sgi_score.py",
+    "evaluation/utils.py",
+    "evaluation/task_1_deep_research/step_1_get_answer.py",
+    "evaluation/task_1_deep_research/step_2_score.py",
+    "evaluation/task_2_idea_generation/step_2_score.py",
+    "evaluation/task_3_dry_experiment/step_3_run_code.py",
+    "evaluation/task_3_dry_experiment/step_4_score.py",
+    "evaluation/task_3_wet_experiment/step_2_score.py",
+    "evaluation/task_4_experimental_reasoning/step_2_score.py"
+  ],
+  "review_status": "independently-reviewed"
+}

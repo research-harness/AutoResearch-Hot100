@@ -5,7 +5,7 @@
 - 站点：<https://atlas.zhice.io>
 - GitHub：<https://github.com/research-harness/AutoResearch-Hot100>
 - 当前快照：2026-09-17
-- 当前完整分析：20 个项目（持续扩展至 100 个）
+- 当前完整分析：100 个项目
 - 每篇分析：固定 13 节、至少一张架构图、固定 commit、公开证据文件清单与事实边界
 
 ## 内容范围

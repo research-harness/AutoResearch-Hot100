@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "snap-stanford/BioDiscoveryAgent",
+  "url": "https://github.com/snap-stanford/BioDiscoveryAgent",
+  "analyzed_commit": "19673c7371c542cfa155ffaa9047c53525f9fe2e",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "research_assistant.py",
+    "tools.py",
+    "get_lit_review.py",
+    "analyze.py",
+    "LLM.py",
+    "data/screen.py"
+  ],
+  "review_status": "independently-reviewed"
+}

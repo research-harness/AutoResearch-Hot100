@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "AD-SDL/MADSci",
+  "url": "https://github.com/AD-SDL/MADSci",
+  "analyzed_commit": "6b1ab6a70ce8b15af7aa8968479c90d9138753d0",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "docs/guides/workflow_development.md",
+    "docs/guides/agent_skills.md",
+    "src/madsci_common/madsci/common/types/workflow_types.py",
+    "src/madsci_workcell_manager/madsci/workcell_manager/workcell_engine.py",
+    "src/madsci_experiment_application/madsci/experiment_application/experiment_application.py"
+  ],
+  "review_status": "independently-reviewed"
+}

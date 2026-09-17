@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "repo": "HICAI-ZJU/SciToolAgent",
+  "url": "https://github.com/HICAI-ZJU/SciToolAgent",
+  "analyzed_commit": "ac1cf19fcef84e69f149db6da424afe4e9b2f11f",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "app.py",
+    "scripts/generate_kg_index.py",
+    "scripts/retrieve_tool_info.py",
+    "app/llms/planning/tool_plan_executor.py",
+    "app/tools/tool_runner.py",
+    "app/tools/safety/toxicity_checker.py",
+    "ToolsAgent/tool_runner.py",
+    "ToolsAgent/main.py",
+    "SciToolEval/README.md",
+    "SciToolEval/eval/eval_accuracy.py"
+  ],
+  "review_status": "independently-reviewed"
+}

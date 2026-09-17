@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "airas-org/airas",
+  "url": "https://github.com/airas-org/airas",
+  "analyzed_commit": "72c4b5c83eb33a5b5709fa6fc9069f9b6425664f",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "backend/src/airas/mcp/tools/execution.py",
+    "backend/src/airas/mcp/tools/record.py",
+    "backend/src/airas/mcp/tools/figures.py",
+    "backend/src/airas/research_record/derive_results.py",
+    "backend/src/airas/research_record/verify.py",
+    "backend/src/airas/usecases/autonomous_research/workflows/experiment_cycle_graph.py"
+  ],
+  "review_status": "independently-reviewed"
+}

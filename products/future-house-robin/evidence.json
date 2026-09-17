@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "repo": "Future-House/robin",
+  "url": "https://github.com/Future-House/robin",
+  "analyzed_commit": "4a5cce310f3bc7663a67117db88af43b84733ffe",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "robin/configuration.py",
+    "robin/assays.py",
+    "robin/candidates.py",
+    "robin/analyses.py",
+    "robin/prompts.py"
+  ],
+  "review_status": "independently-reviewed"
+}

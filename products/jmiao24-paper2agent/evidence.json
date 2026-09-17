@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "jmiao24/Paper2Agent",
+  "url": "https://github.com/jmiao24/Paper2Agent",
+  "analyzed_commit": "c5ce59cc726eddebd6623cc70ad2a80ae55c224e",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "skills/paper2agent/SKILL.md",
+    "skills/paper2agent/paper2skill/SKILL.md",
+    "skills/paper2agent/paper2mcp/references/orchestration.md",
+    "skills/paper2agent/paper2mcp/references/runtime-verification.md",
+    "skills/paper2agent/paper2mcp/scripts/verify_workflow.py"
+  ],
+  "review_status": "independently-reviewed"
+}

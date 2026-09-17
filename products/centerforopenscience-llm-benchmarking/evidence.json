@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "repo": "CenterForOpenScience/llm-benchmarking",
+  "url": "https://github.com/CenterForOpenScience/llm-benchmarking",
+  "analyzed_commit": "fb6a804fd710764f3ad3c8b84e1323c2804c4776",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "replicatorbench/README.md",
+    "replicatorbench/Makefile",
+    "replicatorbench/core/agent.py",
+    "replicatorbench/generator/orchestrator_tool.py",
+    "replicatorbench/interpreter/agent.py",
+    "replicatorbench/validator/README.md",
+    "replicatorbench/core/tools.py"
+  ],
+  "review_status": "independently-reviewed"
+}

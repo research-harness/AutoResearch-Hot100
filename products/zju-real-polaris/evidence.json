@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "repo": "ZJU-REAL/Polaris",
+  "url": "https://github.com/ZJU-REAL/Polaris",
+  "analyzed_commit": "6db273982ab75c9455799e3686579fdcce18f2fd",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "docs/architecture.md",
+    "docs/desktop.md",
+    "src/backend/app/agents/voyage/navigator.py",
+    "src/backend/app/agents/voyage/helm.py",
+    "src/backend/app/agents/voyage/sextant.py",
+    "src/backend/app/agents/voyage/checks.py",
+    "src/backend/app/services/manuscripts.py",
+    "src/backend/app/services/manuscript_versions.py"
+  ],
+  "review_status": "independently-reviewed"
+}

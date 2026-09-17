@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "repo": "lamm-mit/AtomAgents",
+  "url": "https://github.com/lamm-mit/AtomAgents",
+  "analyzed_commit": "b0ef01fb9ea1c2f25c146ea7934b6c4586c027cd",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "AtomAgents.py",
+    "0_codes/compliance.py",
+    "LICENSE"
+  ],
+  "review_status": "independently-reviewed"
+}

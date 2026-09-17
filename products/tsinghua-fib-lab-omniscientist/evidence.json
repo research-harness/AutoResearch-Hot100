@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "repo": "tsinghua-fib-lab/OmniScientist",
+  "url": "https://github.com/tsinghua-fib-lab/OmniScientist",
+  "analyzed_commit": "216277d31c0e5aaf55dde8e4baddc600d148fe94",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "papers/HybridQuestion.pdf"
+  ],
+  "review_status": "independently-reviewed"
+}

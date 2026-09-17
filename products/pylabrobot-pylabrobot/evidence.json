@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "PyLabRobot/pylabrobot",
+  "url": "https://github.com/PyLabRobot/pylabrobot",
+  "analyzed_commit": "43b7b5913f2aa49eef2f65bd1735cd3165396ade",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "pylabrobot/resources/volume_tracker.py",
+    "pylabrobot/events/bus.py",
+    "pylabrobot/visualizer/visualizer.py",
+    "docs/user_guide/machines.md"
+  ],
+  "review_status": "independently-reviewed"
+}

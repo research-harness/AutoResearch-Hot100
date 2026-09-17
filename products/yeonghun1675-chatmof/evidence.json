@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "Yeonghun1675/ChatMOF",
+  "url": "https://github.com/Yeonghun1675/ChatMOF",
+  "analyzed_commit": "886056fc0b96be6081ba1cd8e17166ced520ccd5",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "chatmof/agents/agent.py",
+    "chatmof/tools/tool_utils.py",
+    "chatmof/tools/predictor/base.py",
+    "chatmof/tools/search_csv/base.py",
+    "chatmof/tools/genetic_algorithm/genetic_algorithm.py",
+    "chatmof/tools/visualizer/base.py"
+  ],
+  "review_status": "independently-reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "repo": "chiang-yuan/llamp",
+  "url": "https://github.com/chiang-yuan/llamp",
+  "analyzed_commit": "77991f07afb501e05d943026ed2e30c9d0b4921c",
+  "snapshot_date": "2026-09-17",
+  "license": "定制 BSD-3 风格声明",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "api/pyproject.toml",
+    "api/src/llamp/mp/agents.py",
+    "api/src/llamp/mp/tools.py",
+    "api/src/llamp/arxiv/agents.py",
+    "api/src/llamp/ase/tools.py",
+    "api/src/llamp/atomate2/tools.py",
+    "api/src/llamp/sse.py"
+  ],
+  "review_status": "independently-reviewed"
+}

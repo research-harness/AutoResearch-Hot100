@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "AutoSurveys/AutoSurvey",
+  "url": "https://github.com/AutoSurveys/AutoSurvey",
+  "analyzed_commit": "5e8f389f3d51b29bad16dc6ae75db3e8a45a3b65",
+  "snapshot_date": "2026-09-17",
+  "license": "未声明（README 自称 MIT）",
+  "evidence_files": [
+    "README.md",
+    "main.py",
+    "evaluation.py",
+    "requirements.txt",
+    "src/database.py",
+    "src/agents/outline_writer.py",
+    "src/agents/writer.py",
+    "src/agents/judge.py"
+  ],
+  "review_status": "independently-reviewed"
+}

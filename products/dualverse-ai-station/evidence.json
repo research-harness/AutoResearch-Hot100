@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "repo": "dualverse-ai/station",
+  "url": "https://github.com/dualverse-ai/station",
+  "analyzed_commit": "782088e561998bf357d95a838a0566a8229425d9",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "station/station.py",
+    "station/research_storage.py",
+    "station/eval_research/evaluation_manager.py",
+    "example/research_alpha_evolve/circle_n32/research/evaluators/evaluator.py"
+  ],
+  "review_status": "independently-reviewed"
+}

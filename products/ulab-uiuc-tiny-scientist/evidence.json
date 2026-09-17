@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "repo": "ulab-uiuc/tiny-scientist",
+  "url": "https://github.com/ulab-uiuc/tiny-scientist",
+  "analyzed_commit": "888c5e3f825392f494891df956f12edfa5a3709a",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "config.template.toml",
+    "tiny_scientist/scientist.py",
+    "tiny_scientist/thinker.py",
+    "tiny_scientist/coder.py",
+    "tiny_scientist/writer.py",
+    "tiny_scientist/reviewer.py",
+    "tiny_scientist/budget_checker.py",
+    "tiny_scientist/tool_impls.py",
+    "tiny_scientist/utils/agent_sdk.py",
+    "tiny_scientist/utils/claude_agent_runner.py",
+    "tiny_scientist/utils/sdk_mcp.py",
+    "tiny_scientist/utils/bib_manager.py",
+    "tiny_scientist/utils/output_formatter.py",
+    "tiny_scientist/mcp/research_server.py",
+    "tiny_scientist/mcp/docker_runner_server.py",
+    "tests/test_sdk_smoke.py",
+    "backend/app.py",
+    "frontend/package.json"
+  ],
+  "review_status": "independently-reviewed"
+}

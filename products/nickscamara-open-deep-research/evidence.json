@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "nickscamara/open-deep-research",
+  "url": "https://github.com/nickscamara/open-deep-research",
+  "analyzed_commit": "eea0962c8be343230d9571cbdeb82df12504ad72",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "app/(chat)/api/chat/route.ts",
+    "lib/ai/prompts.ts",
+    "lib/db/schema.ts",
+    "lib/db/queries.ts",
+    "lib/rate-limit.ts"
+  ],
+  "review_status": "independently-reviewed"
+}

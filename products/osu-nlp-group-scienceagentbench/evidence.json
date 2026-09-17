@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "repo": "OSU-NLP-Group/ScienceAgentBench",
+  "url": "https://github.com/OSU-NLP-Group/ScienceAgentBench",
+  "analyzed_commit": "c26e151ed601ba109dc4d35e057ff8e73fec469d",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "requirements.txt",
+    "agent.py",
+    "run_infer.py",
+    "run_eval.py",
+    "calculate_metrics.py",
+    "evaluation/harness/run_evaluation.py",
+    "evaluation/harness/grading.py",
+    "benchmark/README.md"
+  ],
+  "review_status": "independently-reviewed"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "repo": "mlbio-epfl/HeurekaBench",
+  "url": "https://github.com/mlbio-epfl/HeurekaBench",
+  "analyzed_commit": "c2a2b2fcdc5244220ff60f65483bc084c72a8cf1",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "scheurekabench/README.md",
+    "scheurekabench/benchmark_creation/insights.py",
+    "scheurekabench/benchmark_creation/code_insights.py",
+    "scheurekabench/benchmark_creation/match_insights.py",
+    "scheurekabench/benchmark_creation/insights_to_questions.py",
+    "scheurekabench/benchmark_creation/prompts/insight_extractor.py",
+    "scheurekabench/benchmark_creation/prompts/code_generator.py",
+    "scheurekabench/run_biomni/run_biomni.py",
+    "scheurekabench/run_biomni/biomni_prompts/oe_initial_prompt.py",
+    "scheurekabench/run_biomni/biomni_prompts/mcq_initial_prompt.py",
+    "scheurekabench/run_baselines/CellVoyager/run_cellvoyager.py",
+    "scheurekabench/extract_agent_answer.py",
+    "scheurekabench/evaluate_agent_answer.py",
+    "scheurekabench/geval_prompts/eval_prompts.py",
+    "scheurekabench/benchmark/oeq_lite.json",
+    "Biomni/biomni/agent/a1.py"
+  ],
+  "review_status": "independently-reviewed"
+}

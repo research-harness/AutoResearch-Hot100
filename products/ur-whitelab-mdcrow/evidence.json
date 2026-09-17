@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "ur-whitelab/MDCrow",
+  "url": "https://github.com/ur-whitelab/MDCrow",
+  "analyzed_commit": "b3b0b57a804d97c0d01c810a381313a2bc2114d6",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "mdcrow/agent/agent.py",
+    "mdcrow/agent/memory.py",
+    "mdcrow/tools/maketools.py",
+    "mdcrow/tools/base_tools/simulation_tools/setup_and_run.py",
+    "mdcrow/tools/base_tools/analysis_tools/plot_tools.py",
+    "environment.yaml"
+  ],
+  "review_status": "independently-reviewed"
+}

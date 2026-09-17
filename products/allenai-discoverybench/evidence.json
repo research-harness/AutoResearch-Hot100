@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "repo": "allenai/discoverybench",
+  "url": "https://github.com/allenai/discoverybench",
+  "analyzed_commit": "c31fcf011e070f021a5f5b906896d0821f6880e8",
+  "snapshot_date": "2026-09-17",
+  "license": "ODC-By",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "requirements.txt",
+    "discovery_agent.py",
+    "discovery_eval.py",
+    "agents/coder_agent.py",
+    "agents/react_agent.py",
+    "eval/eval.py",
+    "eval/new_eval.py",
+    "discoverybench/README.md"
+  ],
+  "review_status": "independently-reviewed"
+}

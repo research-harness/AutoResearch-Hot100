@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "repo": "lamm-mit/Sparks",
+  "url": "https://github.com/lamm-mit/Sparks",
+  "analyzed_commit": "1736f8d4e2e3b542983ce33dbd4fcc73c4e20ab9",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "config.json",
+    "requirements.txt",
+    "launch_Sparks.ipynb",
+    "Sparks/functions.py",
+    "Sparks/idea_generation.py",
+    "Sparks/idea_testing.py",
+    "Sparks/refinement.py",
+    "Sparks/documentation.py",
+    "Sparks/Sparks_functions.py",
+    "Sparks/MD_protein.py"
+  ],
+  "review_status": "independently-reviewed"
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "repo": "algorithmicsuperintelligence/openevolve",
+  "url": "https://github.com/algorithmicsuperintelligence/openevolve",
+  "analyzed_commit": "411fb59c886c18704caaffb611e17cf9e7d824d2",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "openevolve/controller.py",
+    "openevolve/process_parallel.py",
+    "openevolve/database.py",
+    "openevolve/evaluator.py",
+    "openevolve/evaluation_result.py",
+    "openevolve/config.py",
+    "openevolve/llm/ensemble.py",
+    "openevolve/prompt/sampler.py",
+    "openevolve/evolution_trace.py",
+    "examples/function_minimization/evaluator.py",
+    "examples/function_minimization/initial_program.py",
+    "scripts/visualizer.py"
+  ],
+  "review_status": "independently-reviewed"
+}

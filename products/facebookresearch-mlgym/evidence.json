@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "repo": "facebookresearch/MLGym",
+  "url": "https://github.com/facebookresearch/MLGym",
+  "analyzed_commit": "9d40c1b5035202018cd7091fb4e83a9c68b377c0",
+  "snapshot_date": "2026-09-17",
+  "license": "CC BY-NC 4.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "run.py",
+    "run_replay.py",
+    "mlgym/environment/env.py",
+    "mlgym/environment/tasks.py",
+    "mlgym/agent/base.py",
+    "mlgym/tools/tools.py",
+    "tools/literature_search.py",
+    "tools/memory_write.py",
+    "configs/agents/default.yaml",
+    "configs/tasks/battleOfSexes.yaml"
+  ],
+  "review_status": "independently-reviewed"
+}

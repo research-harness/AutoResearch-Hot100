@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "maxidl/openreviewer",
+  "url": "https://github.com/maxidl/openreviewer",
+  "analyzed_commit": "31798b43b5fc7a20b28e38821a6684fa0e8ca3f8",
+  "snapshot_date": "2026-09-17",
+  "license": "未声明（GitHub API NOASSERTION）",
+  "evidence_files": [
+    "README.md",
+    "llm_training/README.md",
+    "openreview_dataset_creation/README.md",
+    "llm_training/prepare_data.py",
+    "llm_training/generate.py",
+    "llm_training/compare_reviews.py",
+    "llm_training/fft-llama31-8B-liger-ds.yaml"
+  ],
+  "review_status": "independently-reviewed"
+}

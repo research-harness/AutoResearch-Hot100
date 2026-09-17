@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "MLSysOps/MLE-agent",
+  "url": "https://github.com/MLSysOps/MLE-agent",
+  "analyzed_commit": "a29287e8152456b8d6a09121934522fd2b4e0aa8",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "mle/workflow/baseline.py",
+    "mle/workflow/report.py",
+    "mle/function/execution.py",
+    "mle/function/search.py"
+  ],
+  "review_status": "independently-reviewed"
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "repo": "mims-harvard/TxAgent",
+  "url": "https://github.com/mims-harvard/TxAgent",
+  "analyzed_commit": "8c24ad9ee2aeb6ca541f63c797d57d7e68502aa4",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "src/txagent/txagent.py",
+    "src/txagent/toolrag.py",
+    "src/txagent/utils.py",
+    "run_example.py"
+  ],
+  "review_status": "independently-reviewed"
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "repo": "CMarsRover/SciAgentGYM",
+  "url": "https://github.com/CMarsRover/SciAgentGYM",
+  "analyzed_commit": "e9dbbea4369d67694e38bf8be67bedbcaf9e9300",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "requirements.txt",
+    "gym/env.py",
+    "gym/tool.py",
+    "gym/toolbox.py",
+    "gym/core/environment_fs.py",
+    "gym/core/evaluator.py",
+    "gym/core/tool_loader.py",
+    "gym/test_executor.py"
+  ],
+  "review_status": "independently-reviewed"
+}

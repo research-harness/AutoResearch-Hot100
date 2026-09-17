@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "repo": "OS-Copilot/ScienceBoard",
+  "url": "https://github.com/OS-Copilot/ScienceBoard",
+  "analyzed_commit": "c8d5010bdba32afc5dfb16472873bed148c39a45",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "requirements.txt",
+    "main.py",
+    "sci/Presets.py",
+    "sci/Prompts.py",
+    "sci/Tester.py",
+    "sci/base/task.py",
+    "sci/base/community.py",
+    "sci/vm/vmanager.py",
+    "vm_config/server.py"
+  ],
+  "review_status": "independently-reviewed"
+}

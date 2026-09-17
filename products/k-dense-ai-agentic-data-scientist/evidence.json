@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "K-Dense-AI/agentic-data-scientist",
+  "url": "https://github.com/K-Dense-AI/agentic-data-scientist",
+  "analyzed_commit": "702dee9dfb9e5165ce51b52ad7b7885948df7cd1",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "docs/architecture.md",
+    "src/agentic_data_scientist/agents/adk/stage_orchestrator.py",
+    "src/agentic_data_scientist/agents/claude_code/agent.py",
+    "src/agentic_data_scientist/core/events.py"
+  ],
+  "review_status": "independently-reviewed"
+}

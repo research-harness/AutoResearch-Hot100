@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "UKPLab/nlpeer",
+  "url": "https://github.com/UKPLab/nlpeer",
+  "analyzed_commit": "832352c33f874b4fd207792313ac4916a6137b52",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE.txt",
+    "pyproject.toml",
+    "src/nlpeer/__init__.py",
+    "src/nlpeer/data/__init__.py",
+    "src/nlpeer/tasks/__init__.py",
+    "src/nlpeer/tasks/skimming/evaluate.py",
+    "src/nlpeer/data/annotate/explicit_links.py"
+  ],
+  "review_status": "independently-reviewed"
+}

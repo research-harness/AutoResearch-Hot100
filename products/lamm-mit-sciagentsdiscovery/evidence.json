@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "lamm-mit/SciAgentsDiscovery",
+  "url": "https://github.com/lamm-mit/SciAgentsDiscovery",
+  "analyzed_commit": "c5c30451b29cba813a11b5ce078909a214dad9f2",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE.txt",
+    "setup.py",
+    "ScienceDiscovery/agents.py",
+    "ScienceDiscovery/graph.py",
+    "ScienceDiscovery/llm_config.py",
+    "Notebooks/SciAgents_ScienceDiscovery_GraphReasoning_automated.ipynb",
+    "Notebooks/SciAgents_ScienceDiscovery_GraphReasoning_non-automated.ipynb"
+  ],
+  "review_status": "independently-reviewed"
+}

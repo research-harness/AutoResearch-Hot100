@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "repo": "Anikethh/ResearchGym",
+  "url": "https://github.com/Anikethh/ResearchGym",
+  "analyzed_commit": "0adc08e93754b606d8a76055ed2f1c9574504312",
+  "snapshot_date": "2026-09-17",
+  "license": "未声明（GitHub API NOASSERTION）",
+  "evidence_files": [
+    "README.md",
+    "pyproject.toml",
+    "run_agent.py",
+    "run_inspector.py",
+    "agents/rg_agent_adapter.py",
+    "agents/inspection_agent_adapter.py",
+    "agents/RGAgent/README.md",
+    "agents/InspectionAgent/README.md",
+    "agents/RGAgent/cost_tracker.py",
+    "agents/RGAgent/_async_jobs.py",
+    "utils/logging.py",
+    "tasks/paper_task_mapping.txt",
+    "environment/runtime/uv_runner.py",
+    "environment/runtime/docker_runner.py"
+  ],
+  "review_status": "independently-reviewed"
+}

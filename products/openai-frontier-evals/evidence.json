@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "openai/frontier-evals",
+  "url": "https://github.com/openai/frontier-evals",
+  "analyzed_commit": "51052cede8cc608f95bb00346635e03759013e5a",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE.md",
+    "project/paperbench/README.md",
+    "project/paperbench/paperbench/nano/eval.py",
+    "project/paperbench/paperbench/reproduce.py",
+    "project/paperbench/paperbench/grade.py",
+    "project/paperbench/paperbench/rubric/tasks.py",
+    "project/paperbench/paperbench/judge/simple.py"
+  ],
+  "review_status": "independently-reviewed"
+}

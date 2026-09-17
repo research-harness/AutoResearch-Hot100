@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "repo": "wanshuiyin/Auto-claude-code-research-in-sleep",
+  "url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
+  "analyzed_commit": "b98fc5d6c76e0cf42a6a867f66252e8d7347f4f7",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "AGENT_GUIDE.md",
+    "SETUP_GUIDE.md",
+    "docs/SKILLS_CATALOG.md",
+    "skills/auto-review-loop/SKILL.md",
+    "skills/citation-audit/SKILL.md",
+    "skills/experiment-plan/SKILL.md",
+    "skills/idea-discovery/SKILL.md"
+  ],
+  "review_status": "independently-reviewed"
+}

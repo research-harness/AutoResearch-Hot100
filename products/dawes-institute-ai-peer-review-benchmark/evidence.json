@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "repo": "Dawes-Institute/ai-peer-review-benchmark",
+  "url": "https://github.com/Dawes-Institute/ai-peer-review-benchmark",
+  "analyzed_commit": "3d9188343eebd4312d3bfbde6822cfa4eaf32fb4",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT（论文材料 CC-BY-4.0）",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "candidate_papers_for_error_insertion.md",
+    "error_insertions.csv",
+    "benchmark/models.py",
+    "benchmark/run_reviews.py",
+    "benchmark/matching.py",
+    "benchmark/score_reviews.py",
+    "benchmark/writeup_numbers.py",
+    "benchmark/docx_extract.py",
+    "benchmark/pyproject.toml"
+  ],
+  "review_status": "independently-reviewed"
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "repo": "OSU-NLP-Group/ChemToolAgent",
+  "url": "https://github.com/OSU-NLP-Group/ChemToolAgent",
+  "analyzed_commit": "172f6b82d20f8ca0d325d5c5b1f1f32a7cb42077",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "requirements.txt",
+    "api_keys.py",
+    "chemagent/agent/agent.py",
+    "chemagent/agent/tool_agent.py",
+    "chemagent/agent/rephrasing_agent.py",
+    "chemagent/agent/tools.py",
+    "chemagent/tools/__init__.py",
+    "chemagent/tools/base.py",
+    "chemagent/tools/search.py",
+    "chemagent/tools/python_jupyter.py",
+    "chemagent/llms/requester.py"
+  ],
+  "review_status": "independently-reviewed"
+}

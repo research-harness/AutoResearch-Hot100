@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "repo": "Fung-Lab/LLMatDesign",
+  "url": "https://github.com/Fung-Lab/LLMatDesign",
+  "analyzed_commit": "4532054e6037ea78beed269808b786d981bc1eca",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "setup.py",
+    "llmatdesign/core/agent.py",
+    "llmatdesign/core/discover.py",
+    "llmatdesign/modules/structure_optimization.py",
+    "llmatdesign/modules/llms.py"
+  ],
+  "review_status": "independently-reviewed"
+}

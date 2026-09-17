@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "bytedance/deer-flow",
+  "url": "https://github.com/bytedance/deer-flow",
+  "analyzed_commit": "0efdf8e7d8d2c4f976abd2f4c05fd012e6c317c4",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "backend/docs/ARCHITECTURE.md",
+    "backend/packages/harness/deerflow/agents/lead_agent/agent.py",
+    "backend/packages/harness/deerflow/agents/thread_state.py",
+    "backend/packages/harness/deerflow/subagents/report_contract.py",
+    "skills/public/deep-research/SKILL.md",
+    "backend/docs/checkpoint-retention-contract.md"
+  ],
+  "review_status": "independently-reviewed"
+}

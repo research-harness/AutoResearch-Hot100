@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "facebookresearch/airs-bench",
+  "url": "https://github.com/facebookresearch/airs-bench",
+  "analyzed_commit": "18e4f1d501069cf7d7e2740d81c2ca748c56a6a1",
+  "snapshot_date": "2026-09-17",
+  "license": "CC BY-NC",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "airsbench/tasks/rad/TextualSimilaritySickSpearmanCorrelation/metadata.yaml",
+    "airsbench/tasks/rad/TextualSimilaritySickSpearmanCorrelation/prepare.py",
+    "airsbench/tasks/rad/TextualSimilaritySickSpearmanCorrelation/evaluate.py",
+    "scripts/converter_rad_mlgym_enhanced.py",
+    "datasets/hf_datasets.csv"
+  ],
+  "review_status": "independently-reviewed"
+}

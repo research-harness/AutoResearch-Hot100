@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "repo": "brycewang-stanford/Auto-Research-Skills",
+  "url": "https://github.com/brycewang-stanford/Auto-Research-Skills",
+  "analyzed_commit": "db945bf1aea106face2c4f48351efb60b22c7dc3",
+  "snapshot_date": "2026-09-17",
+  "license": "CC0-1.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "CURATION.md",
+    "AGENTS.md",
+    "catalog/README.md",
+    "catalog/skills.json",
+    "scripts/discover-skills.py",
+    "scripts/scan-skill-safety.py",
+    "tools/build_catalog.py"
+  ],
+  "review_status": "independently-reviewed"
+}

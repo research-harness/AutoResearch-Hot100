@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "ur-whitelab/chemcrow-public",
+  "url": "https://github.com/ur-whitelab/chemcrow-public",
+  "analyzed_commit": "e7ebd5193334ac1d8dea137b635721c7cb470d33",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "chemcrow/agents/chemcrow.py",
+    "chemcrow/agents/tools.py",
+    "chemcrow/tools/search.py",
+    "chemcrow/tools/safety.py",
+    "chemcrow/tools/rdkit.py",
+    "chemcrow/agents/prompts.py"
+  ],
+  "review_status": "independently-reviewed"
+}

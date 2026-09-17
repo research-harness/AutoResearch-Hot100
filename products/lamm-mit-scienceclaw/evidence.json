@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "lamm-mit/scienceclaw",
+  "url": "https://github.com/lamm-mit/scienceclaw",
+  "analyzed_commit": "ab9aba130200e0a7dd4c76dca5cf945169f8c44a",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "ARCHITECTURE.md",
+    "core/skill_executor.py",
+    "reasoning/executor.py",
+    "artifacts/artifact.py",
+    "autonomous/plot_agent.py",
+    "autonomous/paper_agent.py"
+  ],
+  "review_status": "independently-reviewed"
+}

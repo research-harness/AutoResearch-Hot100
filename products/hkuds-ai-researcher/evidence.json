@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "repo": "HKUDS/AI-Researcher",
+  "url": "https://github.com/HKUDS/AI-Researcher",
+  "analyzed_commit": "f9a6f8480860c193afff600eeffe3defcee8a978",
+  "snapshot_date": "2026-09-17",
+  "license": "未声明（GitHub API NOASSERTION）",
+  "evidence_files": [
+    "README.md",
+    "main_ai_researcher.py",
+    "web_ai_researcher.py",
+    "global_state.py",
+    "Communication.md",
+    "paper_agent/writing.py",
+    "paper_agent/section_composer.py",
+    "paper_agent/tex_writer.py",
+    "research_agent/inno/main.py",
+    "research_agent/inno/core.py",
+    "research_agent/inno/cli.py",
+    "research_agent/inno/registry.py",
+    "research_agent/run_infer_idea.py",
+    "benchmark_collection/readme.md"
+  ],
+  "review_status": "independently-reviewed"
+}

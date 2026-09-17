@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "mims-harvard/ToolUniverse",
+  "url": "https://github.com/mims-harvard/ToolUniverse",
+  "analyzed_commit": "e8313460c03ef8c0b23a3b4b58f07474b2f9a460",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "src/tooluniverse/tool_registry.py",
+    "src/tooluniverse/base_tool.py",
+    "src/tooluniverse/execute_function.py",
+    "src/tooluniverse/smcp.py",
+    "src/tooluniverse/cache/result_cache_manager.py",
+    "skills/tooluniverse-literature-deep-research/SKILL.md"
+  ],
+  "review_status": "independently-reviewed"
+}

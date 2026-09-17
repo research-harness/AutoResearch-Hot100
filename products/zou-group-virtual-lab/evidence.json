@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "repo": "zou-group/virtual-lab",
+  "url": "https://github.com/zou-group/virtual-lab",
+  "analyzed_commit": "8a3a4fd9ccc0cd297bd523751e03bc9527c91832",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "src/virtual_lab/run_meeting.py",
+    "src/virtual_lab/agent.py",
+    "src/virtual_lab/utils.py",
+    "nanobody_design/README.md",
+    "nanobody_design/scripts/models/improved/esm.py"
+  ],
+  "review_status": "independently-reviewed"
+}

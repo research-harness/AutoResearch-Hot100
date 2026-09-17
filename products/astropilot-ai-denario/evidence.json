@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "repo": "AstroPilot-AI/Denario",
+  "url": "https://github.com/AstroPilot-AI/Denario",
+  "analyzed_commit": "be9d00856c96c0c1002427629b181606fb364995",
+  "snapshot_date": "2026-09-17",
+  "license": "GPL-3.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "denario/denario.py",
+    "denario/research.py",
+    "denario/config.py",
+    "denario/llm.py",
+    "denario/idea.py",
+    "denario/method.py",
+    "denario/experiment.py",
+    "denario/prompts/experiment.py",
+    "denario/langgraph_agents/agents_graph.py",
+    "denario/langgraph_agents/literature.py",
+    "denario/paper_agents/agents_graph.py",
+    "denario/paper_agents/paper_node.py",
+    "denario/paper_agents/literature.py",
+    "denario/paper_agents/latex.py",
+    "denario/paper_agents/tools.py",
+    "tests/full_paper.py"
+  ],
+  "review_status": "independently-reviewed"
+}

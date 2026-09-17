@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "repo": "openai/mle-bench",
+  "url": "https://github.com/openai/mle-bench",
+  "analyzed_commit": "507f92e1138bb6e40dac5c6ee7a6758e6424bf97",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "mlebench/data.py",
+    "mlebench/grade.py",
+    "mlebench/metrics.py",
+    "agents/run.py",
+    "environment/grading_server.py",
+    "environment/Dockerfile",
+    "experiments/aggregate_grading_reports.py",
+    "agents/registry.py"
+  ],
+  "review_status": "independently-reviewed"
+}

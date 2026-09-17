@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "repo": "allenai/PeerRead",
+  "url": "https://github.com/allenai/PeerRead",
+  "analyzed_commit": "9bb37751781a900cee9e74ec3105997732c8e8e5",
+  "snapshot_date": "2026-09-17",
+  "license": "未声明（子集 CC-BY-4.0）",
+  "evidence_files": [
+    "README.md",
+    "requirements.txt",
+    "code/README.md",
+    "code/models/Paper.py",
+    "code/models/Review.py",
+    "code/accept_classify/classify.py",
+    "code/accept_classify/featurize.py",
+    "data/acl_2017/LICENSE.txt",
+    "data/conll_2016/LICENSE.txt",
+    "data/nips_2013-2017/README.md"
+  ],
+  "review_status": "independently-reviewed"
+}

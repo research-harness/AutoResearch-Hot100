@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "dzhng/deep-research",
+  "url": "https://github.com/dzhng/deep-research",
+  "analyzed_commit": "1f8f3e285bbc23e80b98a66a64effab9069f3ad4",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "package.json",
+    "src/deep-research.ts",
+    "src/run.ts",
+    "src/api.ts",
+    "src/feedback.ts",
+    "src/ai/providers.ts"
+  ],
+  "review_status": "independently-reviewed"
+}

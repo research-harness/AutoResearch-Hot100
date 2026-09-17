@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repo": "zilliztech/deep-searcher",
+  "url": "https://github.com/zilliztech/deep-searcher",
+  "analyzed_commit": "d89e37cdfbbef5e44ae6162ce9cc2c627a69b7e1",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "deepsearcher/agent/deep_search.py",
+    "deepsearcher/offline_loading.py",
+    "deepsearcher/online_query.py",
+    "deepsearcher/vector_db/base.py",
+    "deepsearcher/configuration.py",
+    "evaluation/README.md"
+  ],
+  "review_status": "independently-reviewed"
+}

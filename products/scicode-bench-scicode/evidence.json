@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "repo": "scicode-bench/SciCode",
+  "url": "https://github.com/scicode-bench/SciCode",
+  "analyzed_commit": "e3158ea011d4235245a547460d3688d7ccbf9900",
+  "snapshot_date": "2026-09-17",
+  "license": "Apache-2.0",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+    "src/scicode/parse/parse.py",
+    "src/scicode/compare/cmp.py",
+    "eval/inspect_ai/scicode.py",
+    "eval/inspect_ai/README.md",
+    "eval/scripts/gencode.py",
+    "eval/scripts/test_generated_code.py"
+  ],
+  "review_status": "independently-reviewed"
+}

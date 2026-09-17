@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "repo": "malcolmsimgithub/ChemOS2.0",
+  "url": "https://github.com/malcolmsimgithub/ChemOS2.0",
+  "analyzed_commit": "3223db1e4c8e6cc639bdc1a9a338cbcb9ea25463",
+  "snapshot_date": "2026-09-17",
+  "license": "未声明（README 自称 MIT）",
+  "evidence_files": [
+    "README.md",
+    "ChemOS2.0-simulation/laserworkflow.py",
+    "ChemOS2.0-simulation/sila-atlas/ChemOScampaign.py",
+    "ChemOS2.0-simulation/sila-hplc/hplcsimulator.py",
+    "ChemOS2.0-deploy/aiida-workchain/laser_workchain.py"
+  ],
+  "review_status": "independently-reviewed"
+}

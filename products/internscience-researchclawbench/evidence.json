@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "repo": "InternScience/ResearchClawBench",
+  "url": "https://github.com/InternScience/ResearchClawBench",
+  "analyzed_commit": "ed664513287a1fc60ae319e6bf7dbe7a62144135",
+  "snapshot_date": "2026-09-17",
+  "license": "MIT",
+  "evidence_files": [
+    "README.md",
+    "LICENSE",
+    "evaluation/config.py",
+    "evaluation/instructions_tmpl.py",
+    "evaluation/run_task.py",
+    "evaluation/score.py",
+    "evaluation/server.py",
+    "evaluation/utils.py",
+    "evaluation/agents.json",
+    "eval_configs/researchharness_example_1_single_task.yaml",
+    "rcb-eval",
+    "rcb-clear"
+  ],
+  "review_status": "independently-reviewed"
+}
