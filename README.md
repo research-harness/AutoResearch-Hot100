@@ -65,7 +65,7 @@ python3 -m http.server 8000 --directory dist
 
 ## 关于 Research Harness
 
-本图谱由执策团队维护。我们也在建设 [Research Harness（执策·研枢）](https://zhice.io/tools/research-harness/?utm_source=atlas&utm_medium=referral)：面向文献、证据、实验规划、论文写作与质量门禁的 Agent-first 科研工作流平台。图谱中的竞品分析不构成对 Research Harness 效果的证明。
+本图谱由执策团队维护。图谱中的竞品分析不构成对 Research Harness 效果的证明。
 
 ## 许可
 
