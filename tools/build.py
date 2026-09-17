@@ -180,7 +180,6 @@ def render_dashboard(projects: list[dict]) -> None:
 
 def write_support_files(projects: list[dict]) -> None:
     shutil.copy2(ROOT / "site" / "assets" / "mermaid.min.js", DIST / "assets" / "mermaid.min.js")
-    shutil.copy2(ROOT / "CNAME", DIST / "CNAME")
     (DIST / ".nojekyll").write_text("", encoding="utf-8")
     (DIST / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}/sitemap.xml\n", encoding="utf-8")
     urls = [f"{BASE_URL}/", *(f'{BASE_URL}/products/{project["slug"]}/' for project in projects)]
