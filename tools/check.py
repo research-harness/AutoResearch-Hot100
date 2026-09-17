@@ -434,8 +434,16 @@ def check_dist(projects: list[dict], errors: list[str]) -> None:
     group_pages = list((DIST / "groups").glob("*/index.html")) if (DIST / "groups").exists() else []
     inside_pages = list((DIST / "inside").rglob("index.html")) if (DIST / "inside").exists() else []
     expected = 1 + len(group_pages) + len(inside_pages) + sum(project.get("status") == "published" for project in projects)
+    if not (ROOT / "boards.png").is_file():
+        fail(errors, "boards.png: missing 2x4 board image for the GitHub README")
     if len(group_pages) < 2:
         fail(errors, "dist: expected category index pages under groups/")
+    for page in [DIST / "index.html", *group_pages]:
+        if not page.is_file():
+            continue
+        text = page.read_text(encoding="utf-8")
+        if "八榜" in text or "赛道" in text or "各看 Top 10" in text:
+            fail(errors, f"{page.relative_to(ROOT)}: Hot 100 copy still uses 八榜/赛道 wording")
     if len(inside_pages) != 1 + len(CHAPTERS):
         fail(errors, f"dist: expected {1 + len(CHAPTERS)} Inside redirect pages under inside/")
     for page in inside_pages:
@@ -507,6 +515,8 @@ def main() -> int:
     check_staged_reports(candidates, errors)
     check_uniqueness(projects, candidates, errors)
     check_public_hygiene(errors)
+    if not (ROOT / "boards.png").is_file():
+        fail(errors, "boards.png: missing 2x4 board image for the GitHub README")
     check_dist(projects, errors)
     if errors:
         print("Atlas validation failed:", file=sys.stderr)

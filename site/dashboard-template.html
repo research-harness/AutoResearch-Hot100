@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AutoResearch Hot 100｜八个自动化科研开源榜</title>
-<meta name="description" content="按八个赛道给出有依据的 Top 10：社区关注、近期活跃、证据完整度与分析深度。点进项目看 13 节架构分析。">
+<title>AutoResearch Hot 100</title>
+<meta name="description" content="100 个已完成 13 节架构分析的自动化科研开源项目。按社区关注、近期活跃、证据完整度和分析深度打分，分八个工作切面列出前列。">
 <link rel="canonical" href="https://research-harness.github.io/AutoResearch-Hot100/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="AutoResearch Hot 100｜八个自动化科研开源榜">
-<meta property="og:description" content="按八个赛道给出有依据的 Top 10：社区关注、近期活跃、证据完整度与分析深度。点进项目看 13 节架构分析。">
+<meta property="og:title" content="AutoResearch Hot 100">
+<meta property="og:description" content="100 个已完成 13 节架构分析的自动化科研开源项目。按社区关注、近期活跃、证据完整度和分析深度打分，分八个工作切面列出前列。">
 <meta property="og:url" content="https://research-harness.github.io/AutoResearch-Hot100/">
 <style>
 :root{--bg:#f6f4ef;--fg:#1c1c1c;--muted:#6a645c;--line:#e4ddd2;--panel:#fff;--accent:#8b1e1e;--gold:#c9a227;--max:1080px}
@@ -16,10 +16,10 @@
 </style>
 </head>
 <body>
-<header class="hero"><div class="wrap"><div class="eyebrow">AUTORESEARCH HOT 100 · EIGHT LEADERBOARDS</div><h1>八个赛道，各看 Top 10</h1><p>从 100 个已完成 13 节分析的开源项目里，按社区关注、近期活跃、证据完整度和分析深度打分。点进赛道看榜，再点项目名读完整架构笔记。</p><div class="actions"><a class="button primary" href="#boards">看八榜</a><a class="button" href="https://research-harness.github.io/Inside-Agentic-Science/">Inside Agentic Science</a><a class="button" href="https://github.com/research-harness/AutoResearch-Hot100#评分口径">评分口径</a></div></div></header>
+<header class="hero"><div class="wrap"><div class="eyebrow">AUTORESEARCH HOT 100</div><h1>自动化科研开源项目的架构拆解</h1><p>基于 100 个已完成 13 节分析的仓库。同一套公开快照打四项分——社区关注、近期活跃、证据完整度、分析深度——再按工作对象分成八个切面，每个切面列出前列。机制向的拆解见 Inside Agentic Science。</p><div class="actions"><a class="button primary" href="#boards">按切面浏览</a><a class="button" href="https://research-harness.github.io/Inside-Agentic-Science/">Inside Agentic Science</a><a class="button" href="https://github.com/research-harness/AutoResearch-Hot100#评分口径">评分口径</a></div></div></header>
 <main class="wrap">
-<section class="section"><div class="notice">这是代表性赛道榜，不是运行效果实测，也不只按 stars 排序。分数绑定公开快照，分析页绑定固定 commit。</div><div class="stats"><div class="stat"><b>{{COUNT}}</b><span>已分析项目</span></div><div class="stat"><b>{{GROUPS}}</b><span>赛道榜</span></div><div class="stat"><b>Top 10</b><span>每榜展示名次</span></div><div class="stat"><b>{{SNAPSHOT}}</b><span>最近快照</span></div></div></section>
-<section class="section" id="boards"><h2>按赛道进榜</h2><p>每个榜最多 10 名。名次右侧是综合分；点项目进入带目录的中文分析页。</p></section>
+<section class="section"><div class="notice">分数绑定公开快照，分析页绑定固定 commit。不是运行效果实测，也不只按 stars 排序。</div><div class="stats"><div class="stat"><b>{{COUNT}}</b><span>已分析项目</span></div><div class="stat"><b>{{GROUPS}}</b><span>工作切面</span></div><div class="stat"><b>10</b><span>每切面前列上限</span></div><div class="stat"><b>{{SNAPSHOT}}</b><span>最近快照</span></div></div></section>
+<section class="section" id="boards"><h2>按工作切面浏览</h2><p>每个切面最多列出 10 个项目。右侧是综合分；项目名进入带目录的中文分析页。</p></section>
 <section class="grid">{{GROUP_CARDS}}</section>
 </main>
 <footer class="footer"><div class="wrap">AutoResearch Hot 100 · 中文公开版 · <a href="https://github.com/research-harness/AutoResearch-Hot100">源代码、分数口径与数据</a></div></footer>

@@ -142,7 +142,7 @@ def render_project(project: dict) -> None:
         "{{CANONICAL}}": canonical,
         "{{BRAND}}": "AutoResearch Hot 100",
         "{{SUB}}": f'{project["repo"]} · {project["snapshot_date"]}',
-        "{{HOME}}": '<a class="home" href="../../">← 返回八榜总览</a>',
+        "{{HOME}}": '<a class="home" href="../../">← 返回总览</a>',
         "{{TOC}}": build_toc(toc),
         "{{BODY}}": body,
         "{{MERMAID}}": "../../assets/mermaid.min.js",
@@ -239,8 +239,8 @@ def render_dashboard(projects: list[dict]) -> None:
         items = buckets[slug]
         top = "、".join(item["name"] for item in items[:3])
         group_cards.append(
-            f'<a class="card" href="groups/{slug}/"><span class="rank">Top {len(items)} · 最高 {items[0]["scores"]["total"]} 分</span>'
-            f'<h2>{html.escape(title)}</h2><p>{html.escape(lead)} 本榜前列：{html.escape(top)}。</p></a>'
+            f'<a class="card" href="groups/{slug}/"><span class="rank">前列 {len(items)} · 最高 {items[0]["scores"]["total"]}</span>'
+            f'<h2>{html.escape(title)}</h2><p>{html.escape(lead)} 前列：{html.escape(top)}。</p></a>'
         )
     (DIST / "index.html").write_text(
         fill_template(
@@ -262,13 +262,13 @@ def render_dashboard(projects: list[dict]) -> None:
             fill_template(
                 LIST_TEMPLATE,
                 {
-                    "{{TITLE}}": html.escape(f"{title} Top {len(items)}｜AutoResearch Hot 100"),
+                    "{{TITLE}}": html.escape(f"{title}｜AutoResearch Hot 100"),
                     "{{DESCRIPTION}}": html.escape(lead, quote=True),
                     "{{CANONICAL}}": f"{BASE_URL}/groups/{slug}/",
-                    "{{CRUMB}}": '<a href="../../">八榜总览</a> / Top 10',
-                    "{{EYEBROW}}": f"Top {len(items)} · 快照 {max(project['snapshot_date'] for project in items)}",
+                    "{{CRUMB}}": '<a href="../../">总览</a> / 前列',
+                    "{{EYEBROW}}": f"前列 {len(items)} · 快照 {max(project['snapshot_date'] for project in items)}",
                     "{{HEADING}}": html.escape(title),
-                    "{{LEAD}}": html.escape(lead) + " 分数来自社区关注、近期活跃、证据完整度和分析深度，不是运行效果实测。点项目名进入 13 节分析。",
+                    "{{LEAD}}": html.escape(lead) + " 分数来自社区关注、近期活跃、证据完整度和分析深度，不是运行效果实测。项目名进入对应的 13 节分析。",
                     "{{ITEMS}}": project_list_items(items, "../../products/"),
                     "{{HOME_HREF}}": "../../",
                 },
