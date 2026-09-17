@@ -2,7 +2,7 @@
 
 面向自动化科研开源项目的中文技术架构分析与可复核快照。
 
-- 站点：<https://atlas.zhice.io>
+- 站点：<https://research-harness.github.io/AutoResearch-Hot100/>
 - GitHub：<https://github.com/research-harness/AutoResearch-Hot100>
 - 当前快照：2026-09-17
 - 当前完整分析：100 个项目

@@ -334,7 +334,7 @@ def check_active_markup(text: str, label: str, errors: list[str]) -> None:
 
 def check_public_hygiene(errors: list[str]) -> None:
     roots = [ROOT / "data", ROOT / "products", ROOT / "site", ROOT / "tools", ROOT / ".github"]
-    candidates = [ROOT / "README.md", ROOT / "CONTENT-LICENSE.md", ROOT / "CNAME", ROOT / "LICENSE"]
+    candidates = [ROOT / "README.md", ROOT / "CONTENT-LICENSE.md", ROOT / "LICENSE"]
     for directory in roots:
         if directory.exists():
             candidates.extend(path for path in directory.rglob("*") if path.is_file() and path.suffix in TEXT_SUFFIXES and "assets" not in path.parts)
@@ -404,7 +404,7 @@ def check_dist(projects: list[dict], errors: list[str]) -> None:
             if not nested.parent or nested.parent.name != "li":
                 fail(errors, f"{page.relative_to(ROOT)}: nested TOC list is not inside its parent li")
         canonical = soup.find("link", rel="canonical")
-        if not canonical or not str(canonical.get("href", "")).startswith("https://atlas.zhice.io/"):
+        if not canonical or not str(canonical.get("href", "")).startswith("https://research-harness.github.io/AutoResearch-Hot100/"):
             fail(errors, f"{page.relative_to(ROOT)}: missing canonical URL")
         for tag, attribute in (("a", "href"), ("script", "src"), ("link", "href"), ("img", "src")):
             for node in soup.find_all(tag):

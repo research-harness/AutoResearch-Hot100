@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://atlas.zhice.io/schema/project.schema.json",
+  "$id": "https://github.com/research-harness/AutoResearch-Hot100/raw/main/data/project.schema.json",
   "title": "自动化科研图谱项目记录",
   "type": "object",
   "additionalProperties": false,

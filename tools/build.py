@@ -16,7 +16,7 @@ DIST = ROOT / "dist"
 PROJECTS = ROOT / "data" / "projects.jsonl"
 PAGE_TEMPLATE = ROOT / "site" / "template.html"
 DASHBOARD_TEMPLATE = ROOT / "site" / "dashboard-template.html"
-BASE_URL = "https://atlas.zhice.io"
+BASE_URL = "https://research-harness.github.io/AutoResearch-Hot100"
 
 
 def load_projects() -> list[dict]:
