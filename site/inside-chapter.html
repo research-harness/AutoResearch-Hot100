@@ -11,7 +11,7 @@
 <meta property="og:description" content="{{DESCRIPTION}}">
 <meta property="og:url" content="{{CANONICAL}}">
 <style>
-:root{--bg:#fbfbfa;--fg:#222;--muted:#6b6b6b;--line:#e6e4df;--side:#f3f2ee;--accent:#2b5c8a;--gold:#8a6a2a;--code:#f0efeb;--term:#e8f0f8;--infer:#fff2df;--inferb:#e08a1e;--note:#eef7ee;--left:260px;--right:220px}
+:root{--bg:#fbfbfa;--fg:#222;--muted:#6b6b6b;--line:#e6e4df;--side:#f3f2ee;--accent:#2b5c8a;--gold:#8a6a2a;--code:#f0efeb;--term:#e8f0f8;--infer:#fff2df;--inferb:#e08a1e;--note:#eef7ee;--left:248px;--right:196px}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:16px}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.75 "Iowan Old Style","Palatino Linotype","Songti SC","Noto Serif SC",Georgia,"PingFang SC",serif}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
@@ -26,21 +26,28 @@ nav.left ul,nav.right ul{list-style:none;margin:0;padding:0}nav.left li,nav.righ
 nav.right ul ul{padding-left:10px}
 nav.left a,nav.right a{display:block;padding:3px 6px;border-radius:4px;color:#333}
 nav.left a.active,nav.right a.active{background:#dde7f1;color:var(--accent)}
-main{margin:0 var(--right) 0 var(--left);padding:36px 44px 90px;max-width:860px}
+main{margin:0 var(--right) 0 var(--left);padding:32px 36px 90px}
 .kicker{color:var(--gold);letter-spacing:.14em;font-size:.78em;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
-h1{font-size:2rem;line-height:1.2;margin:.2em 0 .35em}
-.insight{color:#4a443b;max-width:680px}.meta{color:var(--muted);font-size:.92em;margin:12px 0 24px}
-h2{font-size:1.4em;margin:2em 0 .55em;padding-top:.55em;border-top:2px solid var(--line)}
-h3{font-size:1.12em;margin:1.4em 0 .4em}p{margin:.5em 0}ul,ol{padding-left:1.35em}li{margin:.18em 0}
+h1{font-size:clamp(1.7rem,2.4vw,2.15rem);line-height:1.22;margin:.2em 0 .35em}
+.insight{color:#4a443b;max-width:58em}.meta{color:var(--muted);font-size:.92em;margin:12px 0 24px}
+h2{font-size:1.32em;margin:1.8em 0 .5em;padding-top:.5em;border-top:2px solid var(--line)}
+h3{font-size:1.08em;margin:1.25em 0 .35em}p{margin:.5em 0;max-width:62em}ul,ol{padding-left:1.35em;max-width:62em}li{margin:.18em 0}
 blockquote{margin:.9em 0;padding:.55em .9em;border-left:4px solid #bbb;background:#f6f6f4;border-radius:0 6px 6px 0}
 .callout.term{border-left-color:#4a7fb5;background:var(--term)}
 .callout.infer{border-left-color:var(--inferb);background:var(--infer)}
 .callout.infer p:first-child{font-weight:600;color:#8a4b00}
 .callout.note{border-left-color:#5b9c5b;background:var(--note)}
-.tbl{overflow-x:auto;margin:1em 0}table{border-collapse:collapse;width:100%;font-size:.92em}
-th,td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}th{background:#efeeea}
-pre.mermaid{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 8px;margin:1em 0 .3em;text-align:center}
-pre.mermaid svg{max-width:100%;height:auto}.figcap{color:var(--muted);font-size:.9em;text-align:center;margin:.1em 0 1.2em}
+.tbl{overflow-x:auto;margin:1.1em 0;border:1px solid var(--line);border-radius:10px;background:#fff}
+table{border-collapse:collapse;width:100%;min-width:960px;font-size:.86em;line-height:1.45}
+.tbl th:nth-child(1){width:12%}.tbl th:nth-child(2){width:16%}.tbl th:nth-child(3){width:34%}.tbl th:nth-child(4){width:28%}.tbl th:nth-child(5){width:10%}
+th,td{border-bottom:1px solid var(--line);padding:10px 12px;vertical-align:top;text-align:left}
+th{background:#efeeea;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-size:.78em;letter-spacing:.03em;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.tbl code{font-size:.8em;word-break:break-all}
+pre.mermaid{background:linear-gradient(#fff,#f6f5f1);border:1px solid var(--line);border-radius:14px;padding:22px 18px;margin:1.1em 0 .3em;text-align:center;box-shadow:0 10px 28px -20px rgba(40,50,70,.45)}
+pre.mermaid svg{max-width:100%;height:auto}
+pre.mermaid.err{background:#fff0f0;border-color:#e5a3a3;text-align:left;white-space:pre-wrap;font:.8em/1.4 Menlo,monospace;color:#a00;box-shadow:none}
+.figcap{color:var(--muted);font-size:.9em;text-align:center;margin:.15em 0 1.3em}
 .pager{display:flex;justify-content:space-between;gap:12px;margin:36px 0 0;padding-top:18px;border-top:1px solid var(--line)}
 #tgl{display:none;position:fixed;left:10px;top:10px;z-index:9;background:#fff;border:1px solid var(--line);border-radius:6px;padding:4px 10px}
 @media(max-width:1200px){nav.right{display:none}main{margin-right:0}}
@@ -72,7 +79,7 @@ pre.mermaid svg{max-width:100%;height:auto}.figcap{color:var(--muted);font-size:
 </div>
 {{BODY}}
 <h2 id="impl">开源实现：仓库里的这个模块</h2>
-<p>分析池里实现过本章对象的项目都在这张表。路径绑冻结 commit，优劣只谈这个模块。完整 13 节分析在最后一列。</p>
+<p>分析池里实现过本章对象的项目。路径绑冻结 commit；优劣只谈这个模块。</p>
 <div class="tbl">{{PROJECTS}}</div>
 <div class="pager">{{PAGER}}</div>
 </main>
@@ -80,9 +87,18 @@ pre.mermaid svg{max-width:100%;height:auto}.figcap{color:var(--muted);font-size:
 <script>
 (async function(){
   if(window.mermaid){
-    mermaid.initialize({startOnLoad:false, theme:'neutral', securityLevel:'strict',
+    mermaid.initialize({startOnLoad:false, theme:'base', securityLevel:'strict',
       fontFamily:'-apple-system,BlinkMacSystemFont,"PingFang SC",Helvetica,sans-serif',
-      flowchart:{useMaxWidth:true, htmlLabels:true, curve:'basis'}});
+      themeVariables:{
+        darkMode:false, background:'#ffffff', fontSize:'16px',
+        primaryColor:'#dce8f4', primaryTextColor:'#1c2a38', primaryBorderColor:'#2b5c8a',
+        secondaryColor:'#f4ead4', secondaryTextColor:'#3d3424', secondaryBorderColor:'#8a6a2a',
+        tertiaryColor:'#eef4ee', tertiaryTextColor:'#243024', tertiaryBorderColor:'#5b9c5b',
+        lineColor:'#5a6a7a', textColor:'#222', mainBkg:'#dce8f4', nodeBorder:'#2b5c8a',
+        clusterBkg:'#f7f6f2', clusterBorder:'#d4d0c8', titleColor:'#8a6a2a',
+        edgeLabelBackground:'#fbfbfa', actorBkg:'#dce8f4', actorBorder:'#2b5c8a'
+      },
+      flowchart:{useMaxWidth:true, htmlLabels:true, curve:'basis', padding:18, nodeSpacing:42, rankSpacing:52, wrappingWidth:200}});
     const nodes=[...document.querySelectorAll('pre.mermaid')];
     for(const n of nodes){
       try{ await mermaid.parse(n.textContent); }

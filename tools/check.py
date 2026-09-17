@@ -382,6 +382,13 @@ def check_dist(projects: list[dict], errors: list[str]) -> None:
         fail(errors, "dist: expected Inside Agentic Science series pages under inside/")
     for page in inside_pages:
         if page.parent.name == "inside":
+            text = page.read_text(encoding="utf-8")
+            if "怎么读" in text:
+                fail(errors, "dist/inside/index.html: homepage still contains 怎么读")
+            if "ais-workflow.png" not in text:
+                fail(errors, "dist/inside/index.html: homepage needs the workflow figure")
+            if "zhice" in text.lower() or "执策" in text:
+                fail(errors, "dist/inside/index.html: Inside page must not mention zhice")
             continue
         text = page.read_text(encoding="utf-8")
         if "开源实现：仓库里的这个模块" not in text:
@@ -401,6 +408,8 @@ def check_dist(projects: list[dict], errors: list[str]) -> None:
         digest = hashlib.sha256(mermaid.read_bytes()).hexdigest()
         if digest != "07e37dfa97b337ccc85365d57eddf99b9706f09db3b59b260d0333b23b343c4b":
             fail(errors, f"dist: unexpected Mermaid asset SHA-256 {digest}")
+    if not (DIST / "assets" / "ais-workflow.png").is_file():
+        fail(errors, "dist: missing Inside homepage workflow figure")
     for page in pages:
         text = page.read_text(encoding="utf-8")
         for banned in BANNED_TEXT:

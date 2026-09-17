@@ -1073,7 +1073,7 @@ def series_tables() -> str:
     blocks: list[str] = []
     current_part = None
     rows: list[str] = []
-    header = "<thead><tr><th>Part</th><th>Title</th><th>Core Insight</th></tr></thead>"
+    header = "<thead><tr><th>编号</th><th>章节</th><th>判断</th></tr></thead>"
     for chapter in CHAPTERS:
         if chapter["part"] != current_part:
             if rows:
@@ -1119,7 +1119,7 @@ def series_nav(active: str, *, root: bool = False) -> str:
 
 
 def index_page_toc() -> str:
-    items = ['<li><a href="#how">怎么读</a></li>']
+    items: list[str] = []
     seen: list[str] = []
     for chapter in CHAPTERS:
         if chapter["part"] in seen:
