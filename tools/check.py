@@ -380,6 +380,18 @@ def check_dist(projects: list[dict], errors: list[str]) -> None:
         fail(errors, "dist: expected category index pages under groups/")
     if DIST.exists() and len(inside_pages) < 3:
         fail(errors, "dist: expected Inside Agentic Science series pages under inside/")
+    for page in inside_pages:
+        if page.parent.name == "inside":
+            continue
+        text = page.read_text(encoding="utf-8")
+        if "开源实现：仓库里的这个模块" not in text:
+            fail(errors, f"{page.relative_to(ROOT)}: chapter is missing the per-chapter implementation table")
+        if "https://github.com/" not in text or "/blob/" not in text:
+            fail(errors, f"{page.relative_to(ROOT)}: chapter table needs in-repo blob paths")
+        if "zhice" in text.lower() or "执策" in text:
+            fail(errors, f"{page.relative_to(ROOT)}: Inside page must not mention zhice")
+        if re.search(r"优：优点(?:<|（|（源码)|缺：缺点(?:<|是)?", text):
+            fail(errors, f"{page.relative_to(ROOT)}: implementation verdict still contains section headings")
     if len(pages) != expected:
         fail(errors, f"dist: expected {expected} HTML pages, found {len(pages)}")
     mermaid = DIST / "assets" / "mermaid.min.js"

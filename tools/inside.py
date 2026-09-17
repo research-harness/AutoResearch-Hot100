@@ -2,7 +2,13 @@
 from __future__ import annotations
 
 import html
+import json
+import re
+from functools import lru_cache
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+PRODUCTS = ROOT / "products"
 
 CHAPTERS = (
     {
@@ -933,6 +939,131 @@ sequenceDiagram
     },
 )
 
+# Path / glossary needles used to list every published analysis that
+# actually implements the chapter's object. Hits come from evidence_files
+# and the 13-section reports already in products/; analyses are not rewritten.
+_NOISE_FILES = {
+    "readme.md", "license", "license.md", "license.txt", "notice.md",
+    "citation.cff", "pyproject.toml", "setup.py", "setup.cfg",
+    "requirements.txt", "package.json", "makefile", "dockerfile",
+    "contributing.md", "agents.md", "plugin.json", "go.mod",
+}
+_KEEP_DOC = re.compile(
+    r"(SKILL\.md|ARCHITECTURE|PHASES\.md|checkpoint|workflow_types|"
+    r"AGENT-SETUP|LOGGING\.md|langgraph\.json|CLAUDE\.md)",
+    re.I,
+)
+MODULE_RULES: dict[str, dict[str, tuple[str, ...]]] = {
+    "birds-eye": {
+        "path": ("agent.py", "loop.py", "scientist.py", "orchestr", "workflow", "pipeline", "deep_researcher", "controller.py", "run.py", "launch_scientist"),
+        "gloss": ("循环", "状态机", "编排", "agent loop", "loopbase", "rdloop"),
+        "pro": ("阶段", "状态", "循环", "编排", "可续跑", "检查点"),
+        "con": ("写稿", "文献", "证据", "门", "一跑到底", "提示词"),
+    },
+    "stage-object": {
+        "path": ("stage.py", "scientific_stage", "phases.md", "pipeline/manager", "story_generator", "iterative_pipeline", "academic-pipeline", "domains.py", "scientific_stage.py"),
+        "gloss": ("阶段", "stage", "story", "pipeline", "phases"),
+        "pro": ("阶段", "写盘", "续跑", "检查点", "目录"),
+        "con": ("内存", "一跑到底", "无阶段", "提示词"),
+    },
+    "state-machine": {
+        "path": ("state.py", "thread_state", "workflow/data_type", "scientific_stage", "checkpoint", "langgraph", "workcell_engine", "loop.py", "data_type.py"),
+        "gloss": ("状态机", "workflowstate", "checkpoint", "state", "转移"),
+        "pro": ("状态", "写盘", "checkpoint", "转移", "恢复"),
+        "con": ("提示词", "内存", "不可续"),
+    },
+    "roles": {
+        "path": ("agents.py", "workforce", "role-team", "paper_review", "phd", "reviewer.py", "single_agent_worker", "task_channel"),
+        "gloss": ("角色", "workforce", "reviewer", "调度", "phd"),
+        "pro": ("工具集", "角色", "调度", "交接"),
+        "con": ("同一工具", "人设", "提示词复制"),
+    },
+    "inner-outer": {
+        "path": ("rd_loop", "evolving_framework", "idea_generation", "experiment.py", "treesearch", "journal.py", "refinement", "idea_testing"),
+        "gloss": ("内环", "外环", "idea", "experimentrunner", "research", "development"),
+        "pro": ("双环", "假设", "反馈", "idea", "实验后端"),
+        "con": ("单链", "调参", "无假设"),
+    },
+    "query-split": {
+        "path": ("deep_research", "researcher.py", "knowledge_curation", "deep_search.py", "feedback.ts", "skills/researcher", "skills/deep_research"),
+        "gloss": ("子问题", "brief", "检索", "query", "拆"),
+        "pro": ("子问题", "并行", "brief", "规划查询"),
+        "con": ("不分点", "不可检查", "提示词"),
+    },
+    "evidence-object": {
+        "path": ("docs.py", "storm_dataclass", "vector_db", "offline_loading", "evidence.py", "knowledge/store", "types.py"),
+        "gloss": ("chunk", "docs", "evidence", "informationtable", "定位"),
+        "pro": ("chunk", "定位", "入库", "重排", "docs"),
+        "con": ("只有 url", "无段落", "记得"),
+    },
+    "citation-gate": {
+        "path": ("citation", "claim_evidence", "claim_ref", "article_generation", "referencable_text", "citation_coverage"),
+        "gloss": ("引用", "citation", "来源", "generate_answer"),
+        "pro": ("引用", "拒绝", "来源", "编号"),
+        "con": ("请引用", "后贴", "无字段"),
+    },
+    "sandbox-budget": {
+        "path": ("interpreter.py", "docker", "code_runner", "code_execution", "budget_checker", "env.py", "vmanager", "grading_server"),
+        "gloss": ("沙箱", "docker", "预算", "interpreter", "超时"),
+        "pro": ("隔离", "超时", "预算", "容器", "docker"),
+        "con": ("subprocess", "无超时", "本机"),
+    },
+    "trajectory": {
+        "path": ("journal.py", "trace", "evolution_trace", "record.py", "logging.md", "observations/store", "workspace"),
+        "gloss": ("轨迹", "trace", "journal", "workspace", "指标文件"),
+        "pro": ("轨迹", "追加", "失败", "workspace", "journal"),
+        "con": ("覆盖", "只有最终", "无中间"),
+    },
+    "search-tree": {
+        "path": ("treesearch", "journal.py", "paper_node", "openevolve/database", "genetic_algorithm", "agent_manager.py"),
+        "gloss": ("搜索树", "node", "map-elites", "bfts", "journal"),
+        "pro": ("树", "节点", "draft", "debug", "improve", "网格"),
+        "con": ("单链", "max_iters", "无节点类型"),
+    },
+    "claim-align": {
+        "path": ("story_generator", "claim", "derive_results", "verify.py", "claim_evidence", "referencable_text"),
+        "gloss": ("主张", "story", "对齐", "同源"),
+        "pro": ("主张", "同源", "story", "对齐"),
+        "con": ("另起数字", "架构图", "无绑定"),
+    },
+    "review-role": {
+        "path": ("perform_review", "paper_review", "reviewer.py", "integrity", "audit.py", "judge.py", "paper_decision"),
+        "gloss": ("审稿", "reviewer", "checklist", "area chair"),
+        "pro": ("问题列表", "检查点", "独立审", "checklist"),
+        "con": ("直接改稿", "请严格", "无对照"),
+    },
+    "host-skill": {
+        "path": ("skill.md", "skills.json", "skill_executor", "catalog/skills", "SKILL.md"),
+        "gloss": ("技能", "skill", "宿主"),
+        "pro": ("可发现", "可安装", "工作区", "技能清单"),
+        "con": ("只含 markdown", "不可发现", "自研循环"),
+    },
+    "tool-registry": {
+        "path": ("tool_registry", "tools.py", "toolbox", "tool_runner", "maketools", "execute_function", "toolkits"),
+        "gloss": ("注册", "registry", "工具检索", "find"),
+        "pro": ("注册", "检索", "协议", "目录"),
+        "con": ("写进提示", "无检索", "包装脚本"),
+    },
+    "domain-tools": {
+        "path": ("biomni", "chemcrow", "txagent", "medrax", "chatmof", "atomagents", "llamp", "assays.py", "rdkit", "segmentation", "literature.py"),
+        "gloss": ("assay", "领域", "分子", "影像", "知识库"),
+        "pro": ("assay", "知识库", "分子", "领域工具"),
+        "con": ("提示词很长", "工具清单短"),
+    },
+    "device-safety": {
+        "path": ("pylabrobot", "workcell", "workflow_types", "chemos", "safety.py", "volume_tracker", "laserworkflow", "sila"),
+        "gloss": ("设备", "safety", "仪器", "idle", "fault"),
+        "pro": ("设备状态", "安全检查", "实验目录"),
+        "con": ("文档生成", "无状态字段"),
+    },
+    "evaluation": {
+        "path": ("grade.py", "eval.py", "evaluator.py", "scorer", "metrics.py", "benchmark", "run_eval", "sgi_score", "calculate_metrics"),
+        "gloss": ("评分", "基准", "grader", "任务", "可重放"),
+        "pro": ("评分器", "容器", "已知答案", "可重放"),
+        "con": ("演示脚本", "自述分数", "无评分器"),
+    },
+}
+
 
 def part_anchor(part: str) -> str:
     return "part-" + part.split(".", 1)[0].strip().lower()
@@ -1007,20 +1138,202 @@ def chapter_slugs(chapter: dict) -> list[str]:
     return out
 
 
+def _is_source_path(path: str) -> bool:
+    name = Path(path).name.lower()
+    if name in _NOISE_FILES:
+        return False
+    if _KEEP_DOC.search(path):
+        return True
+    suffix = Path(path).suffix.lower()
+    if suffix in {".py", ".ts", ".tsx", ".js", ".go", ".rs"}:
+        return True
+    if suffix in {".yaml", ".yml"} and any(token in path.lower() for token in ("config", "agent", "workflow", "bfts", "default")):
+        return True
+    return name == "skill.md"
+
+
+def _split_report(text: str) -> dict[int, tuple[str, str]]:
+    sections: dict[int, tuple[str, str]] = {}
+    for block in re.split(r"\n(?=## \d+\. )", text):
+        match = re.match(r"## (\d+)\. ([^\n]+)\n(.*)", block, flags=re.S)
+        if match:
+            sections[int(match.group(1))] = (match.group(2).strip(), match.group(3).strip())
+    return sections
+
+
+def _glossary_rows(section: str) -> list[tuple[str, str, str]]:
+    rows: list[tuple[str, str, str]] = []
+    for line in section.splitlines():
+        if not line.startswith("|"):
+            continue
+        cols = [col.strip() for col in line.strip("|").split("|")]
+        if len(cols) < 3 or cols[0] in {"名字", "---"} or set(cols[0]) <= set("-:"):
+            continue
+        name = cols[0].replace("`", "").strip()
+        if name:
+            rows.append((name, cols[1], cols[2]))
+    return rows
+
+
+_PRODUCT_LEAK = re.compile(r"RH|Research Harness|zhice|执策", re.I)
+
+
+def _clean_line(raw: str) -> str:
+    line = raw.strip()
+    line = re.sub(r"\*\*([^*]+)\*\*", r"\1", line)
+    line = re.sub(r"^[-*]\s+", "", line)
+    line = re.sub(r"^\d+[\.\)]\s+", "", line)
+    line = re.sub(r"^(优点|缺点)(?:\s*[：:]|\s*是|\s*有|\s*包括)?\s*[：:．。]?\s*", "", line)
+    line = re.sub(r"^（源码或 README 可定位）\s*", "", line)
+    if not line or line in {"优点", "缺点"} or re.fullmatch(r"(优点|缺点)[（(].{0,20}[)）]?", line):
+        return ""
+    return line.rstrip("。.")
+
+
+def _usable_line(line: str) -> bool:
+    if not line or line.startswith((">", "```", "|", "<", "#")):
+        return False
+    return not _PRODUCT_LEAK.search(line)
+
+
+def _bullet_hits(section: str, needles: tuple[str, ...], limit: int) -> list[str]:
+    hits: list[str] = []
+    for raw in re.split(r"\n+", section):
+        line = _clean_line(raw)
+        if not _usable_line(line):
+            continue
+        if needles and not any(needle.lower() in line.lower() for needle in needles):
+            continue
+        hits.append(line)
+        if len(hits) >= limit:
+            break
+    return hits
+
+
+@lru_cache(maxsize=1)
+def load_analyses() -> dict[str, dict]:
+    analyses: dict[str, dict] = {}
+    for directory in sorted(path for path in PRODUCTS.iterdir() if path.is_dir()):
+        evidence_path = directory / "evidence.json"
+        report_path = directory / "report.md"
+        if not evidence_path.is_file() or not report_path.is_file():
+            continue
+        evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
+        report = report_path.read_text(encoding="utf-8")
+        sections = _split_report(report)
+        analyses[directory.name] = {
+            "files": [path for path in evidence.get("evidence_files") or [] if _is_source_path(path)],
+            "all_files": list(evidence.get("evidence_files") or []),
+            "glossary": _glossary_rows(sections.get(13, ("", ""))[1]),
+            "what": sections.get(1, ("", ""))[1],
+            "runtime": sections.get(2, ("", ""))[1],
+            "stage": sections.get(3, ("", ""))[1],
+            "proscons": sections.get(11, ("", ""))[1],
+        }
+    return analyses
+
+
+def _path_hit(path: str, needle: str) -> bool:
+    lowered = path.lower().replace("\\", "/")
+    token = needle.lower()
+    if "/" in token or token.startswith("."):
+        return token in lowered
+    if "." in Path(token).name and Path(token).suffix:
+        return lowered == token or lowered.endswith("/" + token)
+    return token in lowered
+
+
+def _match_files(files: list[str], needles: tuple[str, ...]) -> list[str]:
+    return [path for path in files if any(_path_hit(path, needle) for needle in needles)]
+
+
+def _match_glossary(rows: list[tuple[str, str, str]], needles: tuple[str, ...]) -> list[tuple[str, str, str]]:
+    hits: list[tuple[str, str, str]] = []
+    for row in rows:
+        blob = " ".join(row).lower()
+        if any(needle.lower() in blob for needle in needles):
+            hits.append(row)
+    return hits
+
+
+def _object_label(files: list[str], glossary: list[tuple[str, str, str]]) -> str:
+    if glossary:
+        names = [row[0] for row in glossary[:3]]
+        return " / ".join(names)
+    if files:
+        return Path(files[0]).name
+    return ""
+
+
+def _module_verdict(analysis: dict, rule: dict[str, tuple[str, ...]]) -> tuple[str, str]:
+    section = analysis["proscons"]
+    parts = re.split(r"(?:\n+\*?\*?缺点\*?\*?|\*\*缺点\*\*|缺点[：:]|缺点是)", section, maxsplit=1)
+    pro_text = parts[0] if parts else section
+    con_text = parts[1] if len(parts) > 1 else ""
+    pro_hits = _bullet_hits(pro_text, rule.get("pro", ()), 1) or _bullet_hits(pro_text, (), 1)
+    con_hits = _bullet_hits(con_text, rule.get("con", ()), 1) or _bullet_hits(con_text, (), 1)
+    return (pro_hits[0] if pro_hits else "见 13 节分析", con_hits[0] if con_hits else "见 13 节分析")
+
+
+def _blob_url(repo: str, commit: str, path: str) -> str:
+    return f"https://github.com/{repo}/blob/{commit}/{path}"
+
+
+def chapter_implementations(chapter: dict, by_slug: dict[str, dict]) -> list[dict]:
+    rule = MODULE_RULES[chapter["slug"]]
+    analyses = load_analyses()
+    featured = {item if isinstance(item, str) else item[0]: ("" if isinstance(item, str) else item[1]) for item in chapter["projects"]}
+    rows: list[dict] = []
+    for slug, project in by_slug.items():
+        if project.get("status") != "published":
+            continue
+        analysis = analyses.get(slug)
+        if not analysis:
+            continue
+        files = _match_files(analysis["files"], rule["path"])
+        glossary = _match_glossary(analysis["glossary"], rule["gloss"])
+        if not files and slug not in featured:
+            continue
+        if not files:
+            files = _match_files(analysis["all_files"], rule["path"])[:3] or analysis["files"][:3]
+        files = files[:4]
+        if not files and slug not in featured:
+            continue
+        if not files:
+            continue
+        obj = featured.get(slug) or _object_label(files, glossary)
+        pro, con = _module_verdict(analysis, rule)
+        rows.append({"slug": slug, "project": project, "obj": obj, "files": files, "pro": pro, "con": con, "featured": slug in featured})
+    rows.sort(key=lambda row: (not row["featured"], -(row["project"].get("stars") or 0), row["project"]["name"].lower()))
+    return rows
+
+
 def project_table(chapter: dict, by_slug: dict[str, dict]) -> str:
-    rows = ["<table><thead><tr><th>这个对象在仓库里</th><th>项目</th><th>分析</th><th>源码快照</th></tr></thead><tbody>"]
-    for item in chapter["projects"]:
-        slug, obj = (item, "") if isinstance(item, str) else item
-        project = by_slug[slug]
+    implementations = chapter_implementations(chapter, by_slug)
+    if not implementations:
+        raise SystemExit(f"inside chapter {chapter['slug']} matched no source paths")
+    rows = [
+        "<table><thead><tr>"
+        "<th>项目</th><th>这个模块在仓库里</th><th>源码路径</th><th>做成什么样</th><th>分析</th>"
+        "</tr></thead><tbody>"
+    ]
+    for item in implementations:
+        project = item["project"]
         commit = project["analyzed_commit"]
-        tree = f"https://github.com/{project['repo']}/tree/{commit}"
         short = commit[:7]
+        links = []
+        for path in item["files"]:
+            url = _blob_url(project["repo"], commit, path)
+            links.append(f'<a href="{html.escape(url)}"><code>{html.escape(path)}</code></a>')
+        verdict = f"优：{html.escape(item['pro'])}<br>缺：{html.escape(item['con'])}"
         rows.append(
             "<tr>"
-            f"<td>{html.escape(obj)}</td>"
             f"<td>{html.escape(project['name'])}</td>"
-            f'<td><a href="../../products/{html.escape(slug)}/">13 节分析</a></td>'
-            f'<td><a href="{html.escape(tree)}"><code>{html.escape(project["repo"])}@{short}</code></a></td>'
+            f"<td>{html.escape(item['obj'])}</td>"
+            f"<td>{'<br>'.join(links)}</td>"
+            f"<td>{verdict}</td>"
+            f'<td><a href="../../products/{html.escape(item["slug"])}/">13 节</a> · '
+            f'<code>{html.escape(short)}</code></td>'
             "</tr>"
         )
     rows.append("</tbody></table>")
@@ -1066,7 +1379,7 @@ def render_inside(
     chapter_template = template_chapter.read_text(encoding="utf-8")
     for number, chapter in enumerate(CHAPTERS):
         _, body, toc = markdown_to_body(chapter["body"])
-        toc.append((2, "impl", "例证：这个对象在开源里叫什么"))
+        toc.append((2, "impl", "开源实现：仓库里的这个模块"))
         page = chapter_template
         for key, value in {
             "{{TITLE}}": html.escape(f'{chapter["code"]} {chapter["title"]}｜Inside Agentic Science'),
