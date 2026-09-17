@@ -1308,7 +1308,7 @@ def chapter_implementations(chapter: dict, by_slug: dict[str, dict]) -> list[dic
     return rows
 
 
-def project_table(chapter: dict, by_slug: dict[str, dict]) -> str:
+def project_table(chapter: dict, by_slug: dict[str, dict], product_href_prefix: str) -> str:
     implementations = chapter_implementations(chapter, by_slug)
     if not implementations:
         raise SystemExit(f"inside chapter {chapter['slug']} matched no source paths")
@@ -1321,6 +1321,7 @@ def project_table(chapter: dict, by_slug: dict[str, dict]) -> str:
         project = item["project"]
         commit = project["analyzed_commit"]
         short = commit[:7]
+        product_href = f"{product_href_prefix}{item['slug']}/"
         links = []
         for path in item["files"]:
             url = _blob_url(project["repo"], commit, path)
@@ -1332,7 +1333,7 @@ def project_table(chapter: dict, by_slug: dict[str, dict]) -> str:
             f"<td>{html.escape(item['obj'])}</td>"
             f"<td>{'<br>'.join(links)}</td>"
             f"<td>{verdict}</td>"
-            f'<td><a href="../../products/{html.escape(item["slug"])}/">13 节</a> · '
+            f'<td><a href="{html.escape(product_href)}">13 节</a> · '
             f'<code>{html.escape(short)}</code></td>'
             "</tr>"
         )
@@ -1353,20 +1354,22 @@ def pager(index: int) -> str:
 
 
 def render_inside(
-    dist: Path,
+    dest: Path,
     template_index: Path,
     template_chapter: Path,
     base_url: str,
     projects: list[dict],
     markdown_to_body,
     build_toc,
+    *,
+    mermaid_href: str,
+    product_href_prefix: str,
 ) -> None:
     by_slug = {project["slug"]: project for project in projects}
     missing = sorted({slug for chapter in CHAPTERS for slug in chapter_slugs(chapter) if slug not in by_slug})
     if missing:
         raise SystemExit(f"inside chapters reference unknown slugs: {missing}")
-    dest = dist / "inside"
-    dest.mkdir(parents=True)
+    dest.mkdir(parents=True, exist_ok=True)
     snapshot = max(project["snapshot_date"] for project in projects)
     index = (
         template_index.read_text(encoding="utf-8")
@@ -1374,6 +1377,7 @@ def render_inside(
         .replace("{{SERIES}}", series_tables())
         .replace("{{SERIES_NAV}}", series_nav("", root=True))
         .replace("{{PAGE_TOC}}", index_page_toc())
+        .replace("{{CANONICAL}}", f"{base_url}/")
     )
     (dest / "index.html").write_text(index, encoding="utf-8")
     chapter_template = template_chapter.read_text(encoding="utf-8")
@@ -1384,16 +1388,16 @@ def render_inside(
         for key, value in {
             "{{TITLE}}": html.escape(f'{chapter["code"]} {chapter["title"]}｜Inside Agentic Science'),
             "{{DESCRIPTION}}": html.escape(chapter["insight"], quote=True),
-            "{{CANONICAL}}": f'{base_url}/inside/{chapter["slug"]}/',
+            "{{CANONICAL}}": f'{base_url}/{chapter["slug"]}/',
             "{{SERIES_NAV}}": series_nav(chapter["slug"]),
             "{{PAGE_TOC}}": build_toc(toc),
             "{{CODE}}": html.escape(f'{chapter["part"]} · {chapter["code"]}'),
             "{{HEADING}}": html.escape(chapter["title"]),
             "{{INSIGHT}}": html.escape(chapter["insight"]),
             "{{BODY}}": body,
-            "{{PROJECTS}}": project_table(chapter, by_slug),
+            "{{PROJECTS}}": project_table(chapter, by_slug, product_href_prefix),
             "{{PAGER}}": pager(number),
-            "{{MERMAID}}": "../../assets/mermaid.min.js",
+            "{{MERMAID}}": mermaid_href,
         }.items():
             page = page.replace(key, value)
         folder = dest / chapter["slug"]

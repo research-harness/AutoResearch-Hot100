@@ -14,6 +14,10 @@ from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
+DIST_INSIDE = ROOT / "dist-inside"
+HOT100_BASE = "https://research-harness.github.io/AutoResearch-Hot100"
+INSIDE_BASE = "https://research-harness.github.io/Inside-Agentic-Science"
+MERMAID_SHA = "07e37dfa97b337ccc85365d57eddf99b9706f09db3b59b260d0333b23b343c4b"
 REQUIRED_PROJECT_FIELDS = {
     "schema_version", "slug", "repo", "name", "tagline", "url", "category",
     "layers", "license", "stars", "stars_approximate", "pushed_at",
@@ -353,7 +357,7 @@ def check_public_hygiene(errors: list[str]) -> None:
             check_active_markup(text, str(path.relative_to(ROOT)), errors)
 
 
-def local_target(page: Path, raw_url: str) -> tuple[Path, str] | None:
+def local_target(page: Path, raw_url: str, root: Path = DIST) -> tuple[Path, str] | None:
     parsed = urlsplit(raw_url)
     if parsed.scheme or parsed.netloc or raw_url.startswith(("mailto:", "javascript:", "data:")):
         return None
@@ -361,7 +365,7 @@ def local_target(page: Path, raw_url: str) -> tuple[Path, str] | None:
     if not path_text:
         target = page
     elif path_text.startswith("/"):
-        target = DIST / path_text.lstrip("/")
+        target = root / path_text.lstrip("/")
     else:
         target = page.parent / path_text
     if path_text.endswith("/") or target.is_dir():
@@ -369,47 +373,16 @@ def local_target(page: Path, raw_url: str) -> tuple[Path, str] | None:
     return target.resolve(), parsed.fragment
 
 
-def check_dist(projects: list[dict], errors: list[str]) -> None:
-    if not DIST.exists():
+def check_mermaid_asset(path: Path, errors: list[str]) -> None:
+    if not path.is_file():
+        fail(errors, f"{path.relative_to(ROOT)}: missing local Mermaid asset")
         return
-    pages = sorted(DIST.rglob("*.html"))
-    group_pages = list((DIST / "groups").glob("*/index.html")) if (DIST / "groups").exists() else []
-    inside_pages = list((DIST / "inside").rglob("index.html")) if (DIST / "inside").exists() else []
-    expected = 1 + len(group_pages) + len(inside_pages) + sum(project.get("status") == "published" for project in projects)
-    if DIST.exists() and len(group_pages) < 2:
-        fail(errors, "dist: expected category index pages under groups/")
-    if DIST.exists() and len(inside_pages) < 3:
-        fail(errors, "dist: expected Inside Agentic Science series pages under inside/")
-    for page in inside_pages:
-        if page.parent.name == "inside":
-            text = page.read_text(encoding="utf-8")
-            if "怎么读" in text:
-                fail(errors, "dist/inside/index.html: homepage still contains 怎么读")
-            if "ais-workflow.png" not in text:
-                fail(errors, "dist/inside/index.html: homepage needs the workflow figure")
-            if "zhice" in text.lower() or "执策" in text:
-                fail(errors, "dist/inside/index.html: Inside page must not mention zhice")
-            continue
-        text = page.read_text(encoding="utf-8")
-        if "开源实现：仓库里的这个模块" not in text:
-            fail(errors, f"{page.relative_to(ROOT)}: chapter is missing the per-chapter implementation table")
-        if "https://github.com/" not in text or "/blob/" not in text:
-            fail(errors, f"{page.relative_to(ROOT)}: chapter table needs in-repo blob paths")
-        if "zhice" in text.lower() or "执策" in text:
-            fail(errors, f"{page.relative_to(ROOT)}: Inside page must not mention zhice")
-        if re.search(r"优：优点(?:<|（|（源码)|缺：缺点(?:<|是)?", text):
-            fail(errors, f"{page.relative_to(ROOT)}: implementation verdict still contains section headings")
-    if len(pages) != expected:
-        fail(errors, f"dist: expected {expected} HTML pages, found {len(pages)}")
-    mermaid = DIST / "assets" / "mermaid.min.js"
-    if not mermaid.is_file():
-        fail(errors, "dist: missing local Mermaid asset")
-    else:
-        digest = hashlib.sha256(mermaid.read_bytes()).hexdigest()
-        if digest != "07e37dfa97b337ccc85365d57eddf99b9706f09db3b59b260d0333b23b343c4b":
-            fail(errors, f"dist: unexpected Mermaid asset SHA-256 {digest}")
-    if not (DIST / "assets" / "ais-workflow.png").is_file():
-        fail(errors, "dist: missing Inside homepage workflow figure")
+    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    if digest != MERMAID_SHA:
+        fail(errors, f"{path.relative_to(ROOT)}: unexpected Mermaid asset SHA-256 {digest}")
+
+
+def scan_pages(root: Path, pages: list[Path], canonical_prefix: str, errors: list[str]) -> None:
     for page in pages:
         text = page.read_text(encoding="utf-8")
         for banned in BANNED_TEXT:
@@ -431,14 +404,14 @@ def check_dist(projects: list[dict], errors: list[str]) -> None:
             if not nested.parent or nested.parent.name != "li":
                 fail(errors, f"{page.relative_to(ROOT)}: nested TOC list is not inside its parent li")
         canonical = soup.find("link", rel="canonical")
-        if not canonical or not str(canonical.get("href", "")).startswith("https://research-harness.github.io/AutoResearch-Hot100/"):
+        if not canonical or not str(canonical.get("href", "")).startswith(canonical_prefix):
             fail(errors, f"{page.relative_to(ROOT)}: missing canonical URL")
         for tag, attribute in (("a", "href"), ("script", "src"), ("link", "href"), ("img", "src")):
             for node in soup.find_all(tag):
                 raw = node.get(attribute)
                 if not raw:
                     continue
-                resolved = local_target(page, str(raw))
+                resolved = local_target(page, str(raw), root)
                 if not resolved:
                     continue
                 target, fragment = resolved
@@ -450,6 +423,76 @@ def check_dist(projects: list[dict], errors: list[str]) -> None:
                     target_ids = ids if target == page.resolve() else {item.get("id") for item in target_soup.find_all(id=True)}
                     if fragment not in target_ids:
                         fail(errors, f"{page.relative_to(ROOT)}: missing anchor {raw}")
+
+
+def check_dist(projects: list[dict], errors: list[str]) -> None:
+    if not DIST.exists():
+        return
+    from inside import CHAPTERS
+
+    pages = sorted(DIST.rglob("*.html"))
+    group_pages = list((DIST / "groups").glob("*/index.html")) if (DIST / "groups").exists() else []
+    inside_pages = list((DIST / "inside").rglob("index.html")) if (DIST / "inside").exists() else []
+    expected = 1 + len(group_pages) + len(inside_pages) + sum(project.get("status") == "published" for project in projects)
+    if len(group_pages) < 2:
+        fail(errors, "dist: expected category index pages under groups/")
+    if len(inside_pages) != 1 + len(CHAPTERS):
+        fail(errors, f"dist: expected {1 + len(CHAPTERS)} Inside redirect pages under inside/")
+    for page in inside_pages:
+        text = page.read_text(encoding="utf-8")
+        if INSIDE_BASE not in text:
+            fail(errors, f"{page.relative_to(ROOT)}: Hot 100 /inside/ must redirect to Inside Agentic Science")
+        if "开源实现：仓库里的这个模块" in text or "ais-workflow.png" in text:
+            fail(errors, f"{page.relative_to(ROOT)}: Hot 100 /inside/ still hosts the series")
+    if len(pages) != expected:
+        fail(errors, f"dist: expected {expected} HTML pages, found {len(pages)}")
+    check_mermaid_asset(DIST / "assets" / "mermaid.min.js", errors)
+    hot_pages = [page for page in pages if page.relative_to(DIST).parts[0] != "inside"]
+    redir_pages = [page for page in pages if page.relative_to(DIST).parts[0] == "inside"]
+    scan_pages(DIST, hot_pages, f"{HOT100_BASE}/", errors)
+    scan_pages(DIST, redir_pages, f"{INSIDE_BASE}/", errors)
+    check_inside_site(errors)
+
+
+def check_inside_site(errors: list[str]) -> None:
+    if not DIST_INSIDE.exists():
+        fail(errors, "dist-inside: missing Inside Agentic Science site")
+        return
+    from inside import CHAPTERS
+
+    pages = sorted(DIST_INSIDE.rglob("*.html"))
+    home = DIST_INSIDE / "index.html"
+    if not home.is_file():
+        fail(errors, "dist-inside: missing homepage")
+        return
+    text = home.read_text(encoding="utf-8")
+    if "怎么读" in text:
+        fail(errors, "dist-inside/index.html: homepage still contains 怎么读")
+    if "ais-workflow.png" not in text:
+        fail(errors, "dist-inside/index.html: homepage needs the workflow figure")
+    if "zhice" in text.lower() or "执策" in text:
+        fail(errors, "dist-inside/index.html: Inside page must not mention zhice")
+    expected = 1 + len(CHAPTERS)
+    if len(pages) != expected:
+        fail(errors, f"dist-inside: expected {expected} HTML pages, found {len(pages)}")
+    for chapter in CHAPTERS:
+        page = DIST_INSIDE / chapter["slug"] / "index.html"
+        if not page.is_file():
+            fail(errors, f"dist-inside/{chapter['slug']}/index.html: missing chapter")
+            continue
+        body = page.read_text(encoding="utf-8")
+        if "开源实现：仓库里的这个模块" not in body:
+            fail(errors, f"{page.relative_to(ROOT)}: chapter is missing the per-chapter implementation table")
+        if "https://github.com/" not in body or "/blob/" not in body:
+            fail(errors, f"{page.relative_to(ROOT)}: chapter table needs in-repo blob paths")
+        if "zhice" in body.lower() or "执策" in body:
+            fail(errors, f"{page.relative_to(ROOT)}: Inside page must not mention zhice")
+        if re.search(r"优：优点(?:<|（|（源码)|缺：缺点(?:<|是)?", body):
+            fail(errors, f"{page.relative_to(ROOT)}: implementation verdict still contains section headings")
+    check_mermaid_asset(DIST_INSIDE / "assets" / "mermaid.min.js", errors)
+    if not (DIST_INSIDE / "assets" / "ais-workflow.png").is_file():
+        fail(errors, "dist-inside: missing homepage workflow figure")
+    scan_pages(DIST_INSIDE, pages, f"{INSIDE_BASE}/", errors)
 
 
 def main() -> int:

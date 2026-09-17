@@ -17,6 +17,7 @@ from inside import CHAPTERS, render_inside
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
+DIST_INSIDE = ROOT / "dist-inside"
 PROJECTS = ROOT / "data" / "projects.jsonl"
 PAGE_TEMPLATE = ROOT / "site" / "template.html"
 DASHBOARD_TEMPLATE = ROOT / "site" / "dashboard-template.html"
@@ -24,6 +25,7 @@ LIST_TEMPLATE = ROOT / "site" / "list-template.html"
 INSIDE_INDEX = ROOT / "site" / "inside-index.html"
 INSIDE_CHAPTER = ROOT / "site" / "inside-chapter.html"
 BASE_URL = "https://research-harness.github.io/AutoResearch-Hot100"
+INSIDE_BASE_URL = "https://research-harness.github.io/Inside-Agentic-Science"
 GROUPS = (
     ("end-to-end", "端到端科研系统", "从想法、实验到稿件的整条科研链。", ("端到端", "AI Scientist", "自主科学", "全模态", "模块化科研", "科研自动化", "开放世界", "论文生产", "论文到科研", "数据到论文")),
     ("method-experiment", "方法发现与自动实验", "假设、实验循环和自动发现。", ("方法发现", "机器学习", "算法发现", "模型架构", "长程", "多模态自主", "科学发现", "自主机器学习")),
@@ -275,20 +277,91 @@ def render_dashboard(projects: list[dict]) -> None:
         )
 
 
+def write_redirect(path: Path, url: str, title: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        "<!doctype html>\n"
+        f'<html lang="zh-CN"><head><meta charset="utf-8">'
+        f'<meta http-equiv="refresh" content="0; url={html.escape(url, quote=True)}">'
+        f'<link rel="canonical" href="{html.escape(url, quote=True)}">'
+        f"<title>{html.escape(title)}</title></head><body>"
+        f'<p><a href="{html.escape(url, quote=True)}">{html.escape(title)}</a></p>'
+        "</body></html>\n",
+        encoding="utf-8",
+    )
+
+
+def write_inside_redirects() -> None:
+    write_redirect(DIST / "inside" / "index.html", f"{INSIDE_BASE_URL}/", "Inside Agentic Science")
+    for chapter in CHAPTERS:
+        write_redirect(
+            DIST / "inside" / chapter["slug"] / "index.html",
+            f'{INSIDE_BASE_URL}/{chapter["slug"]}/',
+            f'{chapter["code"]} {chapter["title"]}｜Inside Agentic Science',
+        )
+
+
+def write_sitemap(dest: Path, urls: list[str]) -> None:
+    dest.write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "\n".join(f"  <url><loc>{url}</loc></url>" for url in urls)
+        + "\n</urlset>\n",
+        encoding="utf-8",
+    )
+
+
 def write_support_files(projects: list[dict]) -> None:
     shutil.copy2(ROOT / "site" / "assets" / "mermaid.min.js", DIST / "assets" / "mermaid.min.js")
-    shutil.copy2(ROOT / "site" / "assets" / "ais-workflow.png", DIST / "assets" / "ais-workflow.png")
     (DIST / ".nojekyll").write_text("", encoding="utf-8")
     (DIST / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}/sitemap.xml\n", encoding="utf-8")
-    urls = [
-        f"{BASE_URL}/",
-        f"{BASE_URL}/inside/",
-        *(f"{BASE_URL}/inside/{chapter['slug']}/" for chapter in CHAPTERS),
-        *(f"{BASE_URL}/groups/{slug}/" for slug, *_ in GROUPS),
-        *(f'{BASE_URL}/products/{project["slug"]}/' for project in projects),
-    ]
-    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(f"  <url><loc>{url}</loc></url>" for url in urls) + "\n</urlset>\n"
-    (DIST / "sitemap.xml").write_text(sitemap, encoding="utf-8")
+    write_sitemap(
+        DIST / "sitemap.xml",
+        [
+            f"{BASE_URL}/",
+            f"{BASE_URL}/inside/",
+            *(f"{BASE_URL}/groups/{slug}/" for slug, *_ in GROUPS),
+            *(f'{BASE_URL}/products/{project["slug"]}/' for project in projects),
+        ],
+    )
+
+
+def write_inside_site(projects: list[dict], markdown_to_body, build_toc) -> None:
+    if DIST_INSIDE.exists():
+        shutil.rmtree(DIST_INSIDE)
+    (DIST_INSIDE / "assets").mkdir(parents=True)
+    shutil.copy2(ROOT / "site" / "assets" / "mermaid.min.js", DIST_INSIDE / "assets" / "mermaid.min.js")
+    shutil.copy2(ROOT / "site" / "assets" / "ais-workflow.png", DIST_INSIDE / "assets" / "ais-workflow.png")
+    render_inside(
+        DIST_INSIDE,
+        INSIDE_INDEX,
+        INSIDE_CHAPTER,
+        INSIDE_BASE_URL,
+        projects,
+        markdown_to_body,
+        build_toc,
+        mermaid_href="../assets/mermaid.min.js",
+        product_href_prefix=f"{BASE_URL}/products/",
+    )
+    (DIST_INSIDE / ".nojekyll").write_text("", encoding="utf-8")
+    (DIST_INSIDE / "robots.txt").write_text(
+        f"User-agent: *\nAllow: /\nSitemap: {INSIDE_BASE_URL}/sitemap.xml\n",
+        encoding="utf-8",
+    )
+    write_sitemap(
+        DIST_INSIDE / "sitemap.xml",
+        [
+            f"{INSIDE_BASE_URL}/",
+            *(f"{INSIDE_BASE_URL}/{chapter['slug']}/" for chapter in CHAPTERS),
+        ],
+    )
+    (DIST_INSIDE / "README.md").write_text(
+        "# Inside Agentic Science\n\n"
+        f"公开站：<{INSIDE_BASE_URL}/>\n\n"
+        "源码、分析池和构建脚本在 [AutoResearch-Hot100](https://github.com/research-harness/AutoResearch-Hot100)。"
+        "本仓库只发布静态站点。\n",
+        encoding="utf-8",
+    )
 
 
 def main() -> None:
@@ -297,11 +370,12 @@ def main() -> None:
         shutil.rmtree(DIST)
     (DIST / "assets").mkdir(parents=True)
     render_dashboard(projects)
-    render_inside(DIST, INSIDE_INDEX, INSIDE_CHAPTER, BASE_URL, projects, markdown_to_body, build_toc)
+    write_inside_redirects()
+    write_inside_site(projects, markdown_to_body, build_toc)
     for project in projects:
         render_project(project)
     write_support_files(projects)
-    print(f"built {len(projects)} project pages in {DIST}")
+    print(f"built {len(projects)} project pages in {DIST} and Inside site in {DIST_INSIDE}")
 
 
 if __name__ == "__main__":

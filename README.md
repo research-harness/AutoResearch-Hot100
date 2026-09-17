@@ -3,7 +3,7 @@
 面向自动化科研开源项目的中文技术架构分析，以及按赛道公开的 Top 10 榜。
 
 - 八榜：<https://research-harness.github.io/AutoResearch-Hot100/>
-- 工作流导读：[Inside Agentic Science](https://research-harness.github.io/AutoResearch-Hot100/inside/)
+- Inside Agentic Science：<https://research-harness.github.io/Inside-Agentic-Science/>
 - GitHub：<https://github.com/research-harness/AutoResearch-Hot100>
 - 作者：[北大Biajin学长](https://github.com/Biajin-PKU)
 - 当前快照：2026-09-17
@@ -11,7 +11,7 @@
 - 公开榜：8 个赛道，每榜最多 10 名
 - 每篇分析：固定 13 节、至少一张架构图、固定 commit、公开证据文件清单与事实边界
 
-点进某个赛道看名次，再点项目名进入独立分析页。同一批分析在 Inside Agentic Science 里按运行对象切开：一章只讲一个机制（状态机、证据对象、内环、沙箱等）。每章末尾列出实现过该模块的开源项目，接到仓库内部路径和冻结 commit。
+点进某个赛道看名次，再点项目名进入独立分析页。同一批分析在 [Inside Agentic Science](https://research-harness.github.io/Inside-Agentic-Science/) 里按运行对象切开：一章只讲一个机制（状态机、证据对象、内环、沙箱等）。每章末尾列出实现过该模块的开源项目，接到仓库内部路径和冻结 commit。
 
 ## 评分口径
 
