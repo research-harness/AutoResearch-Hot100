@@ -30,6 +30,7 @@ GROUPS = (
     ("chem-lab", "化学、材料与实验室", "化学工具、材料设计和实验室编排。", ("化学", "材料", "分子", "原子", "实验室", "湿实验", "晶体")),
     ("infra-tools", "基础设施与专用工具", "绘图、工具层、领域执行器和编排底座。", ()),
 )
+ROMANS = ("II", "III", "IV", "V", "VI", "VII", "VIII", "IX")
 
 
 def load_projects() -> list[dict]:
@@ -134,9 +135,9 @@ def render_project(project: dict) -> None:
         "{{TITLE}}": html.escape(title),
         "{{DESCRIPTION}}": html.escape(description, quote=True),
         "{{CANONICAL}}": canonical,
-        "{{BRAND}}": "AutoResearch Hot 100",
+        "{{BRAND}}": "Inside Agentic Science",
         "{{SUB}}": f'{project["repo"]} · {project["snapshot_date"]}',
-        "{{HOME}}": '<a class="home" href="../../">← 返回八榜总览</a>',
+        "{{HOME}}": f'<a class="home" href="../../groups/{group_slug_for(project)}/">← 返回本章榜单</a>',
         "{{TOC}}": build_toc(toc),
         "{{BODY}}": body,
         "{{MERMAID}}": "../../assets/mermaid.min.js",
@@ -226,16 +227,22 @@ def fill_template(path: Path, replacements: dict[str, str]) -> str:
     return template
 
 
-def render_dashboard(projects: list[dict]) -> None:
-    buckets = grouped_projects(projects)
-    group_cards = []
-    for slug, title, lead, _keys in GROUPS:
+def render_series(buckets: dict[str, list[dict]]) -> str:
+    books = []
+    for number, (roman, (slug, title, lead, _keys)) in enumerate(zip(ROMANS, GROUPS), 2):
         items = buckets[slug]
         top = "、".join(item["name"] for item in items[:3])
-        group_cards.append(
-            f'<a class="card" href="groups/{slug}/"><span class="rank">Top {len(items)} · 最高 {items[0]["scores"]["total"]} 分</span>'
-            f'<h2>{html.escape(title)}</h2><p>{html.escape(lead)} 本榜前列：{html.escape(top)}。</p></a>'
+        books.append(
+            f'<div class="book"><h3>{roman}. {html.escape(title)}</h3><table>'
+            f'<tr><td class="num">{number:02d}</td><td class="title"><a href="groups/{slug}/">Top {len(items)}</a></td>'
+            f'<td class="insight">{html.escape(lead)} 前列：{html.escape(top)}。</td></tr>'
+            "</table></div>"
         )
+    return "\n".join(books)
+
+
+def render_dashboard(projects: list[dict]) -> None:
+    buckets = grouped_projects(projects)
     (DIST / "index.html").write_text(
         fill_template(
             DASHBOARD_TEMPLATE,
@@ -243,25 +250,24 @@ def render_dashboard(projects: list[dict]) -> None:
                 "{{COUNT}}": str(len(projects)),
                 "{{GROUPS}}": str(len(GROUPS)),
                 "{{SNAPSHOT}}": max(project["snapshot_date"] for project in projects),
-                "{{GROUP_CARDS}}": "\n".join(group_cards),
+                "{{SERIES}}": render_series(buckets),
             },
         ),
         encoding="utf-8",
     )
-    list_template = LIST_TEMPLATE
-    for slug, title, lead, _keys in GROUPS:
+    for roman, (slug, title, lead, _keys) in zip(ROMANS, GROUPS):
         items = buckets[slug]
         dest = DIST / "groups" / slug
         dest.mkdir(parents=True)
         (dest / "index.html").write_text(
             fill_template(
-                list_template,
+                LIST_TEMPLATE,
                 {
-                    "{{TITLE}}": html.escape(f"{title} Top {len(items)}｜AutoResearch Hot 100"),
+                    "{{TITLE}}": html.escape(f"{roman} · {title} Top {len(items)}｜Inside Agentic Science"),
                     "{{DESCRIPTION}}": html.escape(lead, quote=True),
                     "{{CANONICAL}}": f"{BASE_URL}/groups/{slug}/",
-                    "{{CRUMB}}": '<a href="../../">八榜总览</a> / Top 10',
-                    "{{EYEBROW}}": f"Top {len(items)} · 快照 {max(project['snapshot_date'] for project in items)}",
+                    "{{CRUMB}}": '<a href="../../">Inside Agentic Science</a> / 赛道榜',
+                    "{{EYEBROW}}": f"{roman} · Top {len(items)} · 快照 {max(project['snapshot_date'] for project in items)}",
                     "{{HEADING}}": html.escape(title),
                     "{{LEAD}}": html.escape(lead) + " 分数来自社区关注、近期活跃、证据完整度和分析深度，不是运行效果实测。点项目名进入 13 节分析。",
                     "{{ITEMS}}": project_list_items(items, "../../products/"),

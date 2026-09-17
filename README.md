@@ -1,6 +1,6 @@
 # AutoResearch Hot 100
 
-面向自动化科研开源项目的中文技术架构分析，以及按赛道公开的 Top 10 榜。
+[Inside Agentic Science](https://research-harness.github.io/AutoResearch-Hot100/) 把 100 个自动化科研开源项目读成一套导读：首页按科研链分九部，八个赛道各有公开打分的 Top 10，点项目名进入 13 节中文架构分析。
 
 - 站点：<https://research-harness.github.io/AutoResearch-Hot100/>
 - GitHub：<https://github.com/research-harness/AutoResearch-Hot100>
@@ -8,8 +8,6 @@
 - 分析池：100 个已完成 13 节分析的项目
 - 公开榜：8 个赛道，每榜最多 10 名
 - 每篇分析：固定 13 节、至少一张架构图、固定 commit、公开证据文件清单与事实边界
-
-点进某个赛道看名次，再点项目名进入独立分析页。
 
 ## 评分口径
 
