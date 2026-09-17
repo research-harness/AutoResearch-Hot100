@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import html
 import json
+import math
 import re
 import shutil
 import subprocess
+from datetime import date
 from pathlib import Path
 
 from bs4 import BeautifulSoup
@@ -134,7 +136,7 @@ def render_project(project: dict) -> None:
         "{{CANONICAL}}": canonical,
         "{{BRAND}}": "AutoResearch Hot 100",
         "{{SUB}}": f'{project["repo"]} · {project["snapshot_date"]}',
-        "{{HOME}}": '<a class="home" href="../../">← 返回项目总览</a>',
+        "{{HOME}}": '<a class="home" href="../../">← 返回八榜总览</a>',
         "{{TOC}}": build_toc(toc),
         "{{BODY}}": body,
         "{{MERMAID}}": "../../assets/mermaid.min.js",
@@ -155,6 +157,29 @@ def format_stars(project: dict) -> str:
     return f"{prefix}{stars:,}"
 
 
+def clamp(value: float) -> int:
+    return max(0, min(25, round(value)))
+
+
+def score_project(project: dict) -> dict:
+    stars = project["stars"] or 0
+    community = clamp(math.log10(stars + 1) / math.log10(20001) * 25)
+    recency_days = (date.fromisoformat(project["snapshot_date"]) - date.fromisoformat(project["pushed_at"])).days
+    recency = clamp(25 * max(0, 1 - recency_days / 540))
+    evidence_n = len(json.loads((ROOT / "products" / project["slug"] / "evidence.json").read_text(encoding="utf-8"))["evidence_files"])
+    evidence = clamp(evidence_n / 12 * 25)
+    report_n = len((ROOT / "products" / project["slug"] / "report.md").read_text(encoding="utf-8"))
+    analysis = clamp((report_n - 3000) / 5000 * 25)
+    total = community + recency + evidence + analysis
+    return {
+        "community": community,
+        "recency": recency,
+        "evidence": evidence,
+        "analysis": analysis,
+        "total": total,
+    }
+
+
 def group_slug_for(project: dict) -> str:
     category = project["category"]
     for slug, _title, _lead, keys in GROUPS[:-1]:
@@ -165,22 +190,31 @@ def group_slug_for(project: dict) -> str:
 
 def grouped_projects(projects: list[dict]) -> dict[str, list[dict]]:
     buckets = {slug: [] for slug, *_ in GROUPS}
-    for project in sorted(projects, key=lambda item: item["featured_order"]):
+    for project in projects:
+        project = dict(project)
+        project["scores"] = score_project(project)
         buckets[group_slug_for(project)].append(project)
-    missing = [slug for slug, items in buckets.items() if not items]
-    if missing:
-        raise SystemExit(f"empty groups: {missing}")
+    for slug, items in buckets.items():
+        items.sort(key=lambda item: (-item["scores"]["total"], item["featured_order"]))
+        buckets[slug] = items[:10]
+        if len(buckets[slug]) < 5:
+            raise SystemExit(f"group {slug} has only {len(buckets[slug])} ranked projects")
     return buckets
 
 
 def project_list_items(projects: list[dict], href_prefix: str) -> str:
     items = []
-    for project in projects:
-        tags = "".join(f'<span class="tag">{html.escape(tag)}</span>' for tag in [project["category"], *project["layers"][:3]])
+    medals = {1: "🥇", 2: "🥈", 3: "🥉"}
+    for rank, project in enumerate(projects, 1):
+        scores = project["scores"]
+        medal = medals.get(rank, f"{rank:02d}")
         items.append(
-            f'<article class="item"><span class="rank">#{project["featured_order"]} · {html.escape(project["repo"])}</span>'
-            f'<h2><a href="{href_prefix}{project["slug"]}/">{html.escape(project["name"])}</a></h2>'
-            f'<p>{html.escape(project["tagline"])}</p><div class="tags">{tags}</div></article>'
+            f'<a class="row" href="{href_prefix}{project["slug"]}/">'
+            f'<span class="place">{medal}</span>'
+            f'<span class="body"><strong>{html.escape(project["name"])}</strong>'
+            f'<em>{html.escape(project["tagline"])}</em>'
+            f'<small>{html.escape(project["repo"])} · 社区 {scores["community"]} · 活跃 {scores["recency"]} · 证据 {scores["evidence"]} · 分析 {scores["analysis"]}</small></span>'
+            f'<span class="score">{scores["total"]}</span></a>'
         )
     return "\n".join(items)
 
@@ -197,10 +231,10 @@ def render_dashboard(projects: list[dict]) -> None:
     group_cards = []
     for slug, title, lead, _keys in GROUPS:
         items = buckets[slug]
-        names = "、".join(project["name"] for project in items[:3])
+        top = "、".join(item["name"] for item in items[:3])
         group_cards.append(
-            f'<a class="card" href="groups/{slug}/"><span class="rank">{len(items)} 个项目</span>'
-            f'<h2>{html.escape(title)}</h2><p>{html.escape(lead)} 例如 {html.escape(names)}。</p></a>'
+            f'<a class="card" href="groups/{slug}/"><span class="rank">Top {len(items)} · 最高 {items[0]["scores"]["total"]} 分</span>'
+            f'<h2>{html.escape(title)}</h2><p>{html.escape(lead)} 本榜前列：{html.escape(top)}。</p></a>'
         )
     (DIST / "index.html").write_text(
         fill_template(
@@ -223,13 +257,13 @@ def render_dashboard(projects: list[dict]) -> None:
             fill_template(
                 list_template,
                 {
-                    "{{TITLE}}": html.escape(f"{title}｜AutoResearch Hot 100"),
+                    "{{TITLE}}": html.escape(f"{title} Top {len(items)}｜AutoResearch Hot 100"),
                     "{{DESCRIPTION}}": html.escape(lead, quote=True),
                     "{{CANONICAL}}": f"{BASE_URL}/groups/{slug}/",
-                    "{{CRUMB}}": '<a href="../../">AutoResearch Hot 100</a> / 分类',
-                    "{{EYEBROW}}": f"{len(items)} 个项目",
+                    "{{CRUMB}}": '<a href="../../">八榜总览</a> / Top 10',
+                    "{{EYEBROW}}": f"Top {len(items)} · 快照 {max(project['snapshot_date'] for project in items)}",
                     "{{HEADING}}": html.escape(title),
-                    "{{LEAD}}": html.escape(lead),
+                    "{{LEAD}}": html.escape(lead) + " 分数来自社区关注、近期活跃、证据完整度和分析深度，不是运行效果实测。点项目名进入 13 节分析。",
                     "{{ITEMS}}": project_list_items(items, "../../products/"),
                     "{{HOME_HREF}}": "../../",
                 },
