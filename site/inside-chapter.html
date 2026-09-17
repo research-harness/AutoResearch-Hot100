@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<link rel="canonical" href="{{CANONICAL}}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{DESCRIPTION}}">
+<meta property="og:url" content="{{CANONICAL}}">
+<style>
+:root{--bg:#fbfbfa;--fg:#222;--muted:#6b6b6b;--line:#e6e4df;--side:#f3f2ee;--accent:#6b2c12;--gold:#b0892e;--sidew:280px;--panel:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.75 "Iowan Old Style","Songti SC","Noto Serif SC",Georgia,"PingFang SC",serif}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+nav.side{position:fixed;left:0;top:0;bottom:0;width:var(--sidew);overflow-y:auto;background:var(--side);border-right:1px solid var(--line);padding:18px 14px 40px;font-size:.86em}
+nav.side .brand{font-weight:700;margin:0 0 .2em}nav.side .sub{color:var(--muted);font-size:.85em;margin:0 0 .8em}
+nav.side .home{display:block;margin:0 0 .45em;padding:5px 7px;border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--fg)}
+nav.side h3{margin:1em 0 .35em;font-size:.78em;letter-spacing:.08em;color:var(--gold)}
+nav.side ul{list-style:none;margin:0;padding:0}nav.side li{margin:.12em 0}
+nav.side a{display:block;padding:3px 6px;border-radius:4px;color:#333}nav.side a.active{background:#ead9c4;color:var(--accent)}
+main{margin-left:var(--sidew);padding:36px 48px 80px;max-width:920px}
+.kicker{color:var(--gold);letter-spacing:.14em;font-size:.78em;font-weight:700}h1{font-size:2rem;line-height:1.2;margin:.2em 0 .35em}
+.insight{color:#4a443b;font-size:1.05em;max-width:680px}.meta{color:var(--muted);font-size:.92em;margin:12px 0 28px}
+h2{font-size:1.35em;margin:2em 0 .6em;padding-top:.5em;border-top:1px solid var(--line)}
+p{margin:.55em 0}ul{padding-left:1.3em}.tbl{overflow-x:auto;margin:1em 0}
+table{border-collapse:collapse;width:100%;font-size:.92em}th,td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}th{background:#efeeea}
+.pager{display:flex;justify-content:space-between;gap:12px;margin:36px 0 0;padding-top:18px;border-top:1px solid var(--line)}
+.pager a{color:var(--accent)}#tgl{display:none;position:fixed;left:10px;top:10px;z-index:9;background:#fff;border:1px solid var(--line);border-radius:6px;padding:4px 10px}
+@media(max-width:1000px){nav.side{transform:translateX(-100%);transition:transform .2s;z-index:8}nav.side.show{transform:none}main{margin-left:0;padding:54px 18px 60px}#tgl{display:block}}
+</style>
+</head>
+<body>
+<button id="tgl">目录</button>
+<nav class="side" id="side">
+<p class="brand">Inside Agentic Science</p>
+<p class="sub">科研 Agent 工作流</p>
+<a class="home" href="../">系列首页</a>
+<a class="home" href="../../">Hot 100 八榜</a>
+{{SERIES_NAV}}
+</nav>
+<main>
+<div class="kicker">{{CODE}}</div>
+<h1>{{HEADING}}</h1>
+<p class="insight">{{INSIGHT}}</p>
+<p class="meta">作者 <a href="https://github.com/Biajin-PKU">北大Biajin学长</a> · 实现来自已发布的 13 节分析</p>
+{{BODY}}
+<h2 id="impl">开源实现怎么接到这一段</h2>
+<p>下表项目都有独立分析页。源码列指向分析时冻结的 commit，不是浮动的默认分支。</p>
+<div class="tbl">{{PROJECTS}}</div>
+<div class="pager">{{PAGER}}</div>
+</main>
+<script>document.getElementById('tgl').onclick=()=>document.getElementById('side').classList.toggle('show')</script>
+</body>
+</html>

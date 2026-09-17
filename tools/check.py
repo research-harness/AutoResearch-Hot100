@@ -374,9 +374,12 @@ def check_dist(projects: list[dict], errors: list[str]) -> None:
         return
     pages = sorted(DIST.rglob("*.html"))
     group_pages = list((DIST / "groups").glob("*/index.html")) if (DIST / "groups").exists() else []
-    expected = 1 + len(group_pages) + sum(project.get("status") == "published" for project in projects)
+    inside_pages = list((DIST / "inside").rglob("index.html")) if (DIST / "inside").exists() else []
+    expected = 1 + len(group_pages) + len(inside_pages) + sum(project.get("status") == "published" for project in projects)
     if DIST.exists() and len(group_pages) < 2:
         fail(errors, "dist: expected category index pages under groups/")
+    if DIST.exists() and len(inside_pages) < 3:
+        fail(errors, "dist: expected Inside Agentic Science series pages under inside/")
     if len(pages) != expected:
         fail(errors, f"dist: expected {expected} HTML pages, found {len(pages)}")
     mermaid = DIST / "assets" / "mermaid.min.js"

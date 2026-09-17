@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inside Agentic Science｜科研 Agent 怎么把工作做完</title>
+<meta name="description" content="按科研 Agent 的工作流拆开自动化科研：循环、文献、实验、写稿、领域执行器和评测。每章对应到已分析开源实现的源码快照。">
+<link rel="canonical" href="https://research-harness.github.io/AutoResearch-Hot100/inside/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Inside Agentic Science｜科研 Agent 怎么把工作做完">
+<meta property="og:description" content="按科研 Agent 的工作流拆开自动化科研：循环、文献、实验、写稿、领域执行器和评测。每章对应到已分析开源实现的源码快照。">
+<meta property="og:url" content="https://research-harness.github.io/AutoResearch-Hot100/inside/">
+<style>
+:root{--bg:#f7f4ee;--fg:#1b1a17;--muted:#6b655c;--line:#e6dfd3;--panel:#fffcf7;--accent:#6b2c12;--ink:#2b241c;--gold:#b0892e;--max:920px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16.5px/1.75 "Iowan Old Style","Songti SC","Noto Serif SC",Georgia,"PingFang SC","Hiragino Sans GB",serif}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.wrap{max-width:var(--max);margin:auto;padding:0 28px}.mast{padding:54px 0 28px;border-bottom:1px solid var(--line)}.kicker{letter-spacing:.16em;font-size:.78em;color:var(--gold);font-weight:700}.mast h1{font-size:clamp(2.4rem,6vw,4.1rem);line-height:1.08;margin:.18em 0 .28em;letter-spacing:-.04em;color:var(--ink)}.lede{max-width:640px;color:#4a443b;font-size:1.08em}.byline{margin-top:16px;color:var(--muted);font-size:.95em}.hero-fig{margin:28px 0 8px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px 16px}.hero-fig svg{width:100%;height:auto;display:block}.cap{color:var(--muted);font-size:.88em;margin:6px 0 0}.section{padding:34px 0 8px}.section h2{font-size:1.35em;margin:0 0 .45em}.section p{color:#4a443b;max-width:720px}.book{margin:0 0 28px}.book h3{margin:0 0 8px;font-size:1.05em;letter-spacing:.04em}.book table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}.book td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}.book tr:first-child td{border-top:0}.num{width:72px;color:var(--gold);font-weight:700;white-space:nowrap}.title a{color:var(--ink);font-weight:650}.insight{color:#5c564c;font-size:.95em}.notice{background:#f3ece0;border-left:4px solid var(--gold);padding:10px 14px;border-radius:0 8px 8px 0;color:#4a443b}.footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--muted);font-size:.92em}@media(max-width:700px){.wrap{padding:0 16px}.num{display:block;width:auto;padding-bottom:0}.book td{display:block}}
+</style>
+</head>
+<body>
+<header class="mast"><div class="wrap">
+<div class="kicker">INSIDE AGENTIC SCIENCE</div>
+<h1>科研 Agent 具体是怎么把工作做完的</h1>
+<p class="lede">编码 Agent 会写代码。科研 Agent 还要把文献、假设、实验、图表和审稿收成可检查的产物。这套导读按工作流拆开这个垂域，每一章接到已经读过的开源实现。</p>
+<p class="byline">作者 <a href="https://github.com/Biajin-PKU">北大Biajin学长</a> · 快照 {{SNAPSHOT}} · <a href="../">AutoResearch Hot 100</a> · <a href="https://github.com/research-harness/AutoResearch-Hot100">仓库</a></p>
+</div></header>
+<main class="wrap">
+<figure class="hero-fig">
+<svg viewBox="0 0 860 220" role="img" aria-label="科研 Agent 的六层">
+<rect x="20" y="28" width="820" height="28" rx="8" fill="#efe4cf" stroke="#d7c7a4"/><text x="430" y="47" text-anchor="middle" font-size="14">宿主 / 技能 / CLI</text>
+<rect x="20" y="64" width="820" height="28" rx="8" fill="#efe4cf" stroke="#d7c7a4"/><text x="430" y="83" text-anchor="middle" font-size="14">循环 · 状态机 · 多角色</text>
+<rect x="20" y="100" width="820" height="28" rx="8" fill="#efe4cf" stroke="#d7c7a4"/><text x="430" y="119" text-anchor="middle" font-size="14">文献  →  假设  →  实验  →  写稿  →  审稿</text>
+<rect x="20" y="136" width="400" height="28" rx="8" fill="#efe4cf" stroke="#d7c7a4"/><text x="220" y="155" text-anchor="middle" font-size="14">领域执行器</text>
+<rect x="440" y="136" width="400" height="28" rx="8" fill="#efe4cf" stroke="#d7c7a4"/><text x="640" y="155" text-anchor="middle" font-size="14">评测与基准</text>
+<rect x="20" y="172" width="820" height="28" rx="8" fill="#efe4cf" stroke="#d7c7a4"/><text x="430" y="191" text-anchor="middle" font-size="14">证据、commit、产物</text>
+</svg>
+<figcaption class="cap">顶层是工作流，底层是开源实现。榜单在 Hot 100；这里只讲阶段怎么接上源码。</figcaption>
+</figure>
+<section class="section">
+<div class="notice">每章列出的项目指向同一套 13 节分析，源码链接绑定分析时的 <code>analyzed_commit</code>。</div>
+</section>
+<section class="section" id="series">
+<h2>The Series</h2>
+<p>九部。先看总览，再按科研 Agent 真正干活的顺序往下读。</p>
+{{SERIES}}
+</section>
+</main>
+<footer class="footer"><div class="wrap">Inside Agentic Science · 作者 <a href="https://github.com/Biajin-PKU">北大Biajin学长</a> · <a href="../">Hot 100</a> · <a href="https://github.com/research-harness/AutoResearch-Hot100">源代码与数据</a></div></footer>
+</body>
+</html>

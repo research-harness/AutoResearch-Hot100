@@ -3,58 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Inside Agentic Science｜自动化科研开源导读与八榜</title>
-<meta name="description" content="按科研链把 100 个开源项目读成一套导读。八个赛道各有公开打分的 Top 10，点名次进入 13 节架构分析。">
+<title>AutoResearch Hot 100｜八个自动化科研开源榜</title>
+<meta name="description" content="按八个赛道给出有依据的 Top 10：社区关注、近期活跃、证据完整度与分析深度。点进项目看 13 节架构分析。">
 <link rel="canonical" href="https://research-harness.github.io/AutoResearch-Hot100/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Inside Agentic Science｜自动化科研开源导读与八榜">
-<meta property="og:description" content="按科研链把 100 个开源项目读成一套导读。八个赛道各有公开打分的 Top 10，点名次进入 13 节架构分析。">
+<meta property="og:title" content="AutoResearch Hot 100｜八个自动化科研开源榜">
+<meta property="og:description" content="按八个赛道给出有依据的 Top 10：社区关注、近期活跃、证据完整度与分析深度。点进项目看 13 节架构分析。">
 <meta property="og:url" content="https://research-harness.github.io/AutoResearch-Hot100/">
 <style>
-:root{--bg:#f7f4ee;--fg:#1b1a17;--muted:#6b655c;--line:#e6dfd3;--panel:#fffcf7;--accent:#6b2c12;--ink:#2b241c;--gold:#b0892e;--max:920px}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16.5px/1.75 "Iowan Old Style","Songti SC","Noto Serif SC",Georgia,"PingFang SC","Hiragino Sans GB",serif}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.wrap{max-width:var(--max);margin:auto;padding:0 28px}.mast{padding:54px 0 28px;border-bottom:1px solid var(--line)}.kicker{letter-spacing:.16em;font-size:.78em;color:var(--gold);font-weight:700}.mast h1{font-size:clamp(2.4rem,6vw,4.1rem);line-height:1.08;margin:.18em 0 .28em;letter-spacing:-.04em;color:var(--ink)}.lede{max-width:640px;color:#4a443b;font-size:1.08em}.meta{margin-top:18px;color:var(--muted);font-size:.92em}.hero-fig{margin:28px 0 8px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px 16px}.hero-fig svg{width:100%;height:auto;display:block}.cap{color:var(--muted);font-size:.88em;margin:6px 0 0}.section{padding:34px 0 8px}.section h2{font-size:1.35em;margin:0 0 .45em}.section p{color:#4a443b;max-width:680px}.book{margin:0 0 28px}.book h3{margin:0 0 8px;font-size:1.05em;letter-spacing:.04em}.book table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}.book td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}.book tr:first-child td{border-top:0}.num{width:64px;color:var(--gold);font-weight:700;white-space:nowrap}.title a{color:var(--ink);font-weight:650}.insight{color:#5c564c;font-size:.95em}.notice{background:#f3ece0;border-left:4px solid var(--gold);padding:10px 14px;border-radius:0 8px 8px 0;color:#4a443b}.footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--muted);font-size:.92em}@media(max-width:700px){.wrap{padding:0 16px}.num{display:block;width:auto;padding-bottom:0}.book td{display:block}}
+:root{--bg:#f6f4ef;--fg:#1c1c1c;--muted:#6a645c;--line:#e4ddd2;--panel:#fff;--accent:#8b1e1e;--gold:#c9a227;--max:1080px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1100px 420px at 8% -12%,#f3e7c9,transparent 50%),var(--bg);color:var(--fg);font:16px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",serif}a{color:var(--accent);text-decoration:none}.wrap{max-width:var(--max);margin:auto;padding:0 24px}.hero{padding:62px 0 36px}.eyebrow{color:var(--gold);font-weight:700;letter-spacing:.14em;font-size:.82em}.hero h1{font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.08;margin:.15em 0 .3em;letter-spacing:-.04em}.hero p{max-width:740px;color:#4d4740;font-size:1.08em}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.button{display:inline-block;padding:9px 14px;border:1px solid #d7c7a4;border-radius:999px;background:#fff;color:var(--fg)}.button.primary{background:var(--accent);border-color:var(--accent);color:#fff}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0 8px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}.stat b{font-size:1.7em;display:block}.stat span{color:var(--muted);font-size:.9em}.notice{background:#fff8e8;border-left:4px solid var(--gold);padding:10px 14px;border-radius:0 8px 8px 0;color:#4d4740}.section{padding:28px 0 8px}.section h2{margin:0 0 .3em}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;padding:8px 0 64px}.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;min-height:168px;color:inherit;box-shadow:0 8px 24px -18px rgba(80,40,0,.35)}.card:hover{border-color:#c9b48a;transform:translateY(-2px)}.card .rank{color:var(--accent);font-size:.82em;font-weight:700}.card h2{font-size:1.28em;margin:.2em 0;color:var(--fg)}.card p{margin:.3em 0 0;color:#534c44}.footer{border-top:1px solid var(--line);padding:28px 0 56px;color:var(--muted)}@media(max-width:700px){.wrap{padding:0 16px}.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header class="mast"><div class="wrap">
-<div class="kicker">INSIDE AGENTIC SCIENCE</div>
-<h1>把自动化科研开源项目读成一套导读</h1>
-<p class="lede">先看科研链怎么拆，再进对应赛道的 Top 10。每个上榜项目都有独立的 13 节源码分析，分数来自公开快照，不是运行效果实测。</p>
-<p class="meta">{{COUNT}} 个已分析项目 · {{GROUPS}} 个赛道榜 · 快照 {{SNAPSHOT}} · <a href="https://github.com/research-harness/AutoResearch-Hot100">GitHub</a> · <a href="https://github.com/research-harness/AutoResearch-Hot100#评分口径">评分口径</a></p>
-</div></header>
+<header class="hero"><div class="wrap"><div class="eyebrow">AUTORESEARCH HOT 100 · EIGHT LEADERBOARDS</div><h1>八个赛道，各看 Top 10</h1><p>从 100 个已完成 13 节分析的开源项目里，按社区关注、近期活跃、证据完整度和分析深度打分。点进赛道看榜，再点项目名读完整架构笔记。</p><div class="actions"><a class="button primary" href="#boards">看八榜</a><a class="button" href="inside/">Inside Agentic Science</a><a class="button" href="https://github.com/research-harness/AutoResearch-Hot100#评分口径">评分口径</a></div></div></header>
 <main class="wrap">
-<figure class="hero-fig">
-<svg viewBox="0 0 860 220" role="img" aria-label="从文献到评测的科研链">
-<rect x="8" y="70" width="130" height="72" rx="12" fill="#efe4cf" stroke="#d7c7a4"/>
-<text x="73" y="112" text-anchor="middle" font-size="15">文献</text>
-<rect x="168" y="70" width="130" height="72" rx="12" fill="#efe4cf" stroke="#d7c7a4"/>
-<text x="233" y="112" text-anchor="middle" font-size="15">方法</text>
-<rect x="328" y="70" width="130" height="72" rx="12" fill="#efe4cf" stroke="#d7c7a4"/>
-<text x="393" y="112" text-anchor="middle" font-size="15">实验</text>
-<rect x="488" y="70" width="130" height="72" rx="12" fill="#efe4cf" stroke="#d7c7a4"/>
-<text x="553" y="112" text-anchor="middle" font-size="15">写作</text>
-<rect x="648" y="70" width="130" height="72" rx="12" fill="#efe4cf" stroke="#d7c7a4"/>
-<text x="713" y="112" text-anchor="middle" font-size="15">评测</text>
-<path d="M142 106h22M302 106h22M462 106h22M622 106h22" stroke="#b0892e" stroke-width="3"/>
-</svg>
-<figcaption class="cap">导读按这条链展开：文献与检索、方法与实验、写作与审稿、领域执行器，最后才是评测榜。</figcaption>
-</figure>
-<section class="section" id="how">
-<div class="notice">Hot 100 是分析池。八榜按社区关注、近期活跃、证据完整度和分析深度打分，每榜最多 10 名。点项目名进入带目录的 13 节中文笔记。</div>
-</section>
-<section class="section" id="series">
-<h2>The Series</h2>
-<p>九个部分。I 是读法和口径，II–IX 各挂一条赛道榜。</p>
-<div class="book">
-<h3>I. 导读与口径</h3>
-<table>
-<tr><td class="num">00</td><td class="title"><a href="#how">怎么读这套导读</a></td><td class="insight">先看科研链，再进赛道榜，最后读 13 节分析。</td></tr>
-<tr><td class="num">01</td><td class="title"><a href="https://github.com/research-harness/AutoResearch-Hot100#评分口径">评分口径</a></td><td class="insight">社区关注、近期活跃、证据完整度、分析深度，每项 0–25。</td></tr>
-</table>
-</div>
-{{SERIES}}
-</section>
+<section class="section"><div class="notice">这是代表性赛道榜，不是运行效果实测，也不只按 stars 排序。分数绑定公开快照，分析页绑定固定 commit。</div><div class="stats"><div class="stat"><b>{{COUNT}}</b><span>已分析项目</span></div><div class="stat"><b>{{GROUPS}}</b><span>赛道榜</span></div><div class="stat"><b>Top 10</b><span>每榜展示名次</span></div><div class="stat"><b>{{SNAPSHOT}}</b><span>最近快照</span></div></div></section>
+<section class="section" id="boards"><h2>按赛道进榜</h2><p>每个榜最多 10 名。名次右侧是综合分；点项目进入带目录的中文分析页。</p></section>
+<section class="grid">{{GROUP_CARDS}}</section>
 </main>
-<footer class="footer"><div class="wrap">Inside Agentic Science · AutoResearch Hot 100 · <a href="https://github.com/research-harness/AutoResearch-Hot100">源代码与数据</a></div></footer>
+<footer class="footer"><div class="wrap">AutoResearch Hot 100 · 中文公开版 · <a href="inside/">Inside Agentic Science</a> · <a href="https://github.com/research-harness/AutoResearch-Hot100">源代码、分数口径与数据</a></div></footer>
 </body>
 </html>

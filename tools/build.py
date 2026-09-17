@@ -13,12 +13,16 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+from inside import CHAPTERS, render_inside
+
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
 PROJECTS = ROOT / "data" / "projects.jsonl"
 PAGE_TEMPLATE = ROOT / "site" / "template.html"
 DASHBOARD_TEMPLATE = ROOT / "site" / "dashboard-template.html"
 LIST_TEMPLATE = ROOT / "site" / "list-template.html"
+INSIDE_INDEX = ROOT / "site" / "inside-index.html"
+INSIDE_CHAPTER = ROOT / "site" / "inside-chapter.html"
 BASE_URL = "https://research-harness.github.io/AutoResearch-Hot100"
 GROUPS = (
     ("end-to-end", "端到端科研系统", "从想法、实验到稿件的整条科研链。", ("端到端", "AI Scientist", "自主科学", "全模态", "模块化科研", "科研自动化", "开放世界", "论文生产", "论文到科研", "数据到论文")),
@@ -30,7 +34,6 @@ GROUPS = (
     ("chem-lab", "化学、材料与实验室", "化学工具、材料设计和实验室编排。", ("化学", "材料", "分子", "原子", "实验室", "湿实验", "晶体")),
     ("infra-tools", "基础设施与专用工具", "绘图、工具层、领域执行器和编排底座。", ()),
 )
-ROMANS = ("II", "III", "IV", "V", "VI", "VII", "VIII", "IX")
 
 
 def load_projects() -> list[dict]:
@@ -135,9 +138,9 @@ def render_project(project: dict) -> None:
         "{{TITLE}}": html.escape(title),
         "{{DESCRIPTION}}": html.escape(description, quote=True),
         "{{CANONICAL}}": canonical,
-        "{{BRAND}}": "Inside Agentic Science",
+        "{{BRAND}}": "AutoResearch Hot 100",
         "{{SUB}}": f'{project["repo"]} · {project["snapshot_date"]}',
-        "{{HOME}}": f'<a class="home" href="../../groups/{group_slug_for(project)}/">← 返回本章榜单</a>',
+        "{{HOME}}": '<a class="home" href="../../">← 返回八榜总览</a>',
         "{{TOC}}": build_toc(toc),
         "{{BODY}}": body,
         "{{MERMAID}}": "../../assets/mermaid.min.js",
@@ -227,22 +230,16 @@ def fill_template(path: Path, replacements: dict[str, str]) -> str:
     return template
 
 
-def render_series(buckets: dict[str, list[dict]]) -> str:
-    books = []
-    for number, (roman, (slug, title, lead, _keys)) in enumerate(zip(ROMANS, GROUPS), 2):
-        items = buckets[slug]
-        top = "、".join(item["name"] for item in items[:3])
-        books.append(
-            f'<div class="book"><h3>{roman}. {html.escape(title)}</h3><table>'
-            f'<tr><td class="num">{number:02d}</td><td class="title"><a href="groups/{slug}/">Top {len(items)}</a></td>'
-            f'<td class="insight">{html.escape(lead)} 前列：{html.escape(top)}。</td></tr>'
-            "</table></div>"
-        )
-    return "\n".join(books)
-
-
 def render_dashboard(projects: list[dict]) -> None:
     buckets = grouped_projects(projects)
+    group_cards = []
+    for slug, title, lead, _keys in GROUPS:
+        items = buckets[slug]
+        top = "、".join(item["name"] for item in items[:3])
+        group_cards.append(
+            f'<a class="card" href="groups/{slug}/"><span class="rank">Top {len(items)} · 最高 {items[0]["scores"]["total"]} 分</span>'
+            f'<h2>{html.escape(title)}</h2><p>{html.escape(lead)} 本榜前列：{html.escape(top)}。</p></a>'
+        )
     (DIST / "index.html").write_text(
         fill_template(
             DASHBOARD_TEMPLATE,
@@ -250,12 +247,12 @@ def render_dashboard(projects: list[dict]) -> None:
                 "{{COUNT}}": str(len(projects)),
                 "{{GROUPS}}": str(len(GROUPS)),
                 "{{SNAPSHOT}}": max(project["snapshot_date"] for project in projects),
-                "{{SERIES}}": render_series(buckets),
+                "{{GROUP_CARDS}}": "\n".join(group_cards),
             },
         ),
         encoding="utf-8",
     )
-    for roman, (slug, title, lead, _keys) in zip(ROMANS, GROUPS):
+    for slug, title, lead, _keys in GROUPS:
         items = buckets[slug]
         dest = DIST / "groups" / slug
         dest.mkdir(parents=True)
@@ -263,11 +260,11 @@ def render_dashboard(projects: list[dict]) -> None:
             fill_template(
                 LIST_TEMPLATE,
                 {
-                    "{{TITLE}}": html.escape(f"{roman} · {title} Top {len(items)}｜Inside Agentic Science"),
+                    "{{TITLE}}": html.escape(f"{title} Top {len(items)}｜AutoResearch Hot 100"),
                     "{{DESCRIPTION}}": html.escape(lead, quote=True),
                     "{{CANONICAL}}": f"{BASE_URL}/groups/{slug}/",
-                    "{{CRUMB}}": '<a href="../../">Inside Agentic Science</a> / 赛道榜',
-                    "{{EYEBROW}}": f"{roman} · Top {len(items)} · 快照 {max(project['snapshot_date'] for project in items)}",
+                    "{{CRUMB}}": '<a href="../../">八榜总览</a> / Top 10',
+                    "{{EYEBROW}}": f"Top {len(items)} · 快照 {max(project['snapshot_date'] for project in items)}",
                     "{{HEADING}}": html.escape(title),
                     "{{LEAD}}": html.escape(lead) + " 分数来自社区关注、近期活跃、证据完整度和分析深度，不是运行效果实测。点项目名进入 13 节分析。",
                     "{{ITEMS}}": project_list_items(items, "../../products/"),
@@ -284,6 +281,8 @@ def write_support_files(projects: list[dict]) -> None:
     (DIST / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}/sitemap.xml\n", encoding="utf-8")
     urls = [
         f"{BASE_URL}/",
+        f"{BASE_URL}/inside/",
+        *(f"{BASE_URL}/inside/{chapter['slug']}/" for chapter in CHAPTERS),
         *(f"{BASE_URL}/groups/{slug}/" for slug, *_ in GROUPS),
         *(f'{BASE_URL}/products/{project["slug"]}/' for project in projects),
     ]
@@ -297,6 +296,7 @@ def main() -> None:
         shutil.rmtree(DIST)
     (DIST / "assets").mkdir(parents=True)
     render_dashboard(projects)
+    render_inside(DIST, INSIDE_INDEX, INSIDE_CHAPTER, BASE_URL, projects)
     for project in projects:
         render_project(project)
     write_support_files(projects)
