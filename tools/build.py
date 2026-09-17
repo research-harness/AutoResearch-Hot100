@@ -296,7 +296,7 @@ def main() -> None:
         shutil.rmtree(DIST)
     (DIST / "assets").mkdir(parents=True)
     render_dashboard(projects)
-    render_inside(DIST, INSIDE_INDEX, INSIDE_CHAPTER, BASE_URL, projects)
+    render_inside(DIST, INSIDE_INDEX, INSIDE_CHAPTER, BASE_URL, projects, markdown_to_body, build_toc)
     for project in projects:
         render_project(project)
     write_support_files(projects)
